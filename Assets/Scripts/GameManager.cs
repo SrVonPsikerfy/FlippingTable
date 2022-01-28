@@ -6,6 +6,19 @@ public class GameManager : MonoBehaviour
     // private UIManager uiManager;
     int currentLevel = 0;
 
+    public enum alturas {valle, llano, colina};
+    public enum fichas {ranged, melee, tank, engineer};
+
+    struct Casilla{
+        alturas altura;
+        fichas fichas = null;
+        bool ocupada = false;
+        Vector2 position;
+        GameObject cell;
+    }
+
+    Casilla[][] tablero = null;
+
     private void Awake()
     {
         //Cosa que viene en los apuntes para que el gamemanager no se destruya entre escenas
@@ -18,22 +31,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-    }
-
-    // public void SetUIManager(UIManager uim)
-    // {
-    //     uiManager = uim;
-    // }
-
-    public void Morir(GameObject personaje)
-    {
-        // if (personaje.GetComponentInChildren<PlayerMovement>())
-        // {
-        //     //Debug.LogError("player detectado");
-        //     LevelFinished(false);
-        // }
-
-        // Destroy(personaje);
     }
 
     public void ChangeScene(string name)
@@ -52,5 +49,15 @@ public class GameManager : MonoBehaviour
     public int returncurrentLevel()
     {
         return currentLevel;
+    }
+
+    public void addCell(Vector2 pos, GameObject obj, alturas alt){
+        Casilla c;
+
+        c.position = pos;
+        c.cell = obj;
+        c.altura = alt;
+
+        tablero[pos.y][pos.x] = c;
     }
 }
