@@ -6,20 +6,25 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField]
     int size; 
-    public GameObject prefab = null;
+    public GameObject prefabW = null;
+
+    public GameObject prefabB = null;
     // Start is called before the first frame update
-    void Start()
-    {
-        float init = size/2;
+    void Start(){
+        float init = -size/2;
 
         float auxX = init, auxZ = init;
-        if(prefab != null){
-            Debug.Log("Cosas");
+        bool alternate = true;
+        if(prefabB != null && prefabW != null ){
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
+                    if(alternate) Instantiate(prefabB, new Vector3(auxX, 0 , auxZ), Quaternion.identity);    
+                    else Instantiate(prefabW, new Vector3(auxX, 0 , auxZ), Quaternion.identity);
+
                     auxZ++;
-                    Instantiate(prefab, new Vector3(auxX, 0 , auxZ), Quaternion.identity);
+                    alternate = !alternate;
                 }
+                alternate = !alternate;
                 auxX++;
                 auxZ = init;
             }
