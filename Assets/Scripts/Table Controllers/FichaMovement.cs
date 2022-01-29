@@ -22,6 +22,7 @@ public class FichaMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (Input.GetKeyDown(KeyCode.M)){
             FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
 
@@ -48,16 +49,16 @@ public class FichaMovement : MonoBehaviour
 
             if(infCas != null && selected && !moving){
                 
-                Vector2 dist = infCas.getCords() - infTransf.getCords();
+                Vector2 dist =   infCas.getCords() -
+                    infTransf.getCords();
 
                 if(infGeneral.getMovement() >= Mathf.Abs(dist.x) && infGeneral.getMovement() >= Mathf.Abs(dist.y)){
                     newPos = hit.transform.position;
 
-                    if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-                    else if(infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
-                    else newPos.y = defaultPos;
-            
-                    this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
+                        if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
+                        else if(infCas.getAltura() == GameManager.alturas.valle)newPos.y = vallePos;
+                        else newPos.y = defaultPos;
+                
 
                     infTransf.setCords(infCas.getCords());
 
@@ -72,11 +73,9 @@ public class FichaMovement : MonoBehaviour
                      this.gameObject.GetComponent<FichaInfo>().getRange());
                 }
             }  
+
+
         }
 
-        if(moving) {
-            this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-            if(this.transform.position == newPos) moving = false;
-        }
     }
 }

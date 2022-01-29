@@ -153,6 +153,7 @@ public class MapManager : MonoBehaviour
                 if(!cas.isFlip()){
                     if(cas.getAltura() == GameManager.alturas.valle){
                         cas.setAltura(GameManager.alturas.colina);
+                        if(chid.ficha!=null) child.fi
                     }
                     else if(cas.getAltura()==GameManager.alturas.colina){
                         cas.setAltura( GameManager.alturas.valle);
