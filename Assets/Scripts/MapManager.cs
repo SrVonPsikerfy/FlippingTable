@@ -15,10 +15,11 @@ public class MapManager : MonoBehaviour
     [Header("delay")]
     public float delay = 0.5f;
     public float rSpeed = 50;
+    public Vector3 yVel = Vector3.zero;
 
     float movementY = 0.5f;
     //Privates
-    Quaternion wantedRotation = Quaternion.Euler(180,0,0);
+    Quaternion wantedRotation = Quaternion.Euler(0,0,0);
     bool flipDone = true;   //Ha terminado el flip
     bool topSide = true;    //Esta cara Arriba
     float countdown;
@@ -33,19 +34,19 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update(){
         if (Input.GetKeyDown(KeyCode.F) && flipDone){
-            Debug.Log("uwu");
             flipDone = false;
+            Debug.Log(topSide);
+
+            wantedRotation = (topSide)? Quaternion.Euler(90,0,0): Quaternion.Euler(-90,0,0);
             topSide = !topSide;
-            wantedRotation = (topSide)? Quaternion.Euler(0,0,0): Quaternion.Euler(180,0,0);
         }
-        if(GameManager.getCell(size-1,size-1).transform.rotation.x == wantedRotation.x){
+        else if(GameManager.getCell(size-1,size-1).transform.rotation.x == wantedRotation.x){
             flipDone = true;
             k = 0;
             countdown = delay;
         }
 
         if(!flipDone) flipMap();
-        Debug.Log(k);
     }
 
     void generateMap(){
@@ -74,7 +75,7 @@ public class MapManager : MonoBehaviour
                         cases = Instantiate(prefabColina, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
                     }
 
-                    cases.transform.Rotate(new Vector3(90, 0 , 0));
+                    cases.transform.Rotate(new Vector3(270, 0 , 0));
 
                     cases.transform.parent = this.transform;
                     Vector2 pos = new Vector2(j,i);
@@ -106,9 +107,24 @@ public class MapManager : MonoBehaviour
         for(int j = 0 ; j <= k ; j++ ) {
             int i = k - j;
             if( i < size && j < size ) {
+                //rotacion
                 GameObject child = GameManager.getCell(i,j);
                 Quaternion currentRotation = child.transform.rotation;
                 child.transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * rSpeed);
+                //traslacion
+                casillaInfo cas = child.GetComponent<casillaInfo>();
+                // if(cas.getAltura() == GameManager.alturas.valle){
+                //     cas.setAltura(GameManager.alturas.colina);
+                //     Vector3 currentPosition = child.transform.position;
+                //     Vector3 wantedPosition = new Vector3(currentPosition.x ,currentPosition.y + child.transform.localScale.y, currentPosition.z); 
+                //     child.transform.position = Vector3.SmoothDamp(currentPosition, wantedPosition, ref yVel, Time.deltaTime);
+                // }
+                // else if(cas.getAltura()==GameManager.alturas.colina){
+                //     cas.setAltura( GameManager.alturas.valle);
+                //     Vector3 currentPosition = child.transform.position;
+                //     Vector3 wantedPosition = new Vector3(currentPosition.x ,currentPosition.y - child.transform.localScale.y, currentPosition.z); 
+                //     child.transform.position = Vector3.SmoothDamp(currentPosition, wantedPosition, ref yVel, Time.deltaTime);
+                // }
             }
         }
     }

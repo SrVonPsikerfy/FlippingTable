@@ -22,6 +22,14 @@ public class casillaInfo : MonoBehaviour
         cords = c;
         a = alt;
     }
+    public GameManager.alturas getAltura(){
+        return a;
+    }
+    public void setAltura(GameManager.alturas alt){
+        a = alt;
+    }
+
+    
 
     public Vector2 getCords(){
         return cords;
