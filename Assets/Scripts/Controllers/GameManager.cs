@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public enum flagCell { None, player1, player2}
     public enum playerName { player1, player2};
     public enum fichas {ranged, melee, tank, engineer, none};
-    public static int tableroSize = 10;
+    public static int tableroSize = 8;
     public struct Casilla{
         public alturas altura;
         public fichas ficha;

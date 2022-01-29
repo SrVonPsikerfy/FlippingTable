@@ -50,7 +50,7 @@ public class FichaMovement : MonoBehaviour
                 
                 Vector2 dist = infCas.getCords() - infTransf.getCords();
 
-                if(infGeneral.getMovement() >= dist.x && infGeneral.getMovement() >= dist.y){
+                if(infGeneral.getMovement() >= Mathf.Abs(dist.x) && infGeneral.getMovement() >= Mathf.Abs(dist.y)){
                     newPos = hit.transform.position;
 
                     if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
