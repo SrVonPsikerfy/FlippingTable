@@ -282,7 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55064694cab2b4fce9643c9f1aaa2d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ficha1: {fileID: 7746274022416800687, guid: 920b71968b8a04316b4c0fae395b99ae, type: 3}
+  melee: {fileID: 7746274022416800687, guid: 920b71968b8a04316b4c0fae395b99ae, type: 3}
+  ranged: {fileID: 106161937161441468, guid: 8a3f9266cb1e14d009ac7955e31c3556, type: 3}
+  tank: {fileID: 8440546356260532741, guid: 6e8053999f0684177b4652f0db66fd6f, type: 3}
+  engi: {fileID: 7495590607133220442, guid: dfd0a0961b3c8424c98f877ac5e88b71, type: 3}
 --- !u!4 &971459162
 Transform:
   m_ObjectHideFlags: 0
@@ -493,9 +496,8 @@ MonoBehaviour:
     type: 3}
   prefabValle: {fileID: 1855172519841191119, guid: e6b93db05d8b04621b6e579474b5a52a,
     type: 3}
-  delay: 0.1
-  rSpeed: 800
-  yVel: {x: 0, y: 0, z: 0}
+  delay: 0.5
+  rSpeed: 250
 --- !u!4 &1960324156
 Transform:
   m_ObjectHideFlags: 0

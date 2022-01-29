@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class fichaMovement : MonoBehaviour
 {
+    bool selected = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,14 +35,27 @@ public class fichaMovement : MonoBehaviour
 
    	        Debug.Log("This hit at " + hit.transform.gameObject.name);
 
-            if(hit.transform.gameObject.GetComponent<casillaInfo>() != null){
+            if(hit.transform.gameObject.GetComponent<casillaInfo>() != null && selected){
 
                 Vector3 newPos = hit.transform.position;
 
                 newPos.y = 1.53f;
 
                 this.transform.position = newPos;
-            }   
+
+                selected = false;
+
+                Debug.Log("awa");
+            }
+            else if(hit.transform.gameObject.GetComponent<FichaInfo>() != null){
+                
+                if(hit.transform.gameObject.GetComponent<FichaInfo>().getCords() != 
+                this.gameObject.GetComponent<FichaInfo>().getCords()) selected = false;
+
+                selected = true;
+
+                Debug.Log("ewe");
+            }    
         }
     }
 
