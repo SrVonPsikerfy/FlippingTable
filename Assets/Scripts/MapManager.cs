@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using alturas = GameManager.alturas;
+using flag = GameManager.flagCell;
 public class MapManager : MonoBehaviour
 {
     //Public
@@ -12,6 +13,7 @@ public class MapManager : MonoBehaviour
     public GameObject prefabColina = null;
     public GameObject prefabLlano = null;
     public GameObject prefabValle = null;
+    public GameObject prefabFlag = null;
     [Header("delay")]
     public float delay = 0.5f;
     public float rSpeed = 50;
@@ -27,8 +29,10 @@ public class MapManager : MonoBehaviour
     int k = 0;  //diagonal inicial
     Vector3 yVel = Vector3.zero;
 
+    bool player1Flag, player2Flag;
 
     void Start(){
+        player1Flag = player2Flag = false;
         countdown = delay;
         generateMap();
     }
@@ -80,15 +84,42 @@ public class MapManager : MonoBehaviour
                 for(int j = 0; j < size; j++){
                     //Altura de cadad casilla
                     GameManager.alturas a;
+                    GameManager.flagCell f;
                     int rng = Random.Range(0,100);
 
                     createCell(ref cases, out a, rng, auxX, auxZ);
                     //Asignacion de propiedades de cada casilla
-                    Vector2 pos = new Vector2(j,i);
-                    GameManager.addCell(pos, cases, a);
+                    //Vector posicion
+                    Vector2 pos2D = new Vector2(j,i);
+                    GameManager.addCell(pos2D, cases, a);
+                    //Si es esquina crea flag correspondiente
+                    if(i == 0 && j == 0){
+                        Vector3 pos = cases.transform.position;
+                        switch(a){
+                            case GameManager.alturas.valle: pos.y = 0.5f; break;
+                            case GameManager.alturas.llano: pos.y = 1f; break;
+                            case GameManager.alturas.colina: pos.y = 1.5f; break;
+                        }
+                        GameObject fl = Instantiate(prefabFlag, pos, Quaternion.identity);
+                        f = GameManager.flagCell.player1;
+                        player1Flag = true;
+                    }
+                    else if(i == size-1 && j == size - 1){
+                        Vector3 pos = cases.transform.position;
+                        switch(a){
+                            case GameManager.alturas.valle: pos.y = 0.5f; break;
+                            case GameManager.alturas.llano: pos.y = 1f; break;
+                            case GameManager.alturas.colina: pos.y = 1.5f; break;
+                        }
+                        GameObject fl = Instantiate(prefabFlag, pos, Quaternion.identity);
+                        f = GameManager.flagCell.player2;
+                        player2Flag = true;
+                    }
+                    else
+                        f = GameManager.flagCell.None;
                     casillaInfo cas = cases.GetComponent<casillaInfo>();
                     if(cas != null){
-                        cas.setInfo(pos, a);
+                        cas.setInfo(pos2D, a, f);
                     }
                     auxZ++;
                 }

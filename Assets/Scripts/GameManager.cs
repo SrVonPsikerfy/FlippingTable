@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Material[] colinaInitMaterial = new Material[2];
 
     public enum alturas {valle =  -1, llano = 0, colina = 1};
+
+    public enum flagCell { None, player1, player2}
     public enum playerName { player1, player2};
     public enum fichas {ranged, melee, tank, engineer, none};
     public static int tableroSize = 10;

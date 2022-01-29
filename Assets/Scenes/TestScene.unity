@@ -1229,6 +1229,8 @@ MonoBehaviour:
     type: 3}
   prefabValle: {fileID: 1855172519841191119, guid: e6b93db05d8b04621b6e579474b5a52a,
     type: 3}
+  prefabFlag: {fileID: 1972452827411871902, guid: 6136b119b8f944502a18a1c6f82b03c8,
+    type: 3}
   delay: 0.1
   rSpeed: 800
   ySpeed: 15

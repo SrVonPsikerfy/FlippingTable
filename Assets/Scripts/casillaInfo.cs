@@ -6,7 +6,8 @@ public class casillaInfo : MonoBehaviour
 {
     Vector2 cords;
     GameManager.alturas a;
-
+    GameManager.flagCell flag;
+    
     bool flip = false;
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,10 @@ public class casillaInfo : MonoBehaviour
         
     }
 
-    public void setInfo(Vector2 c, GameManager.alturas alt){
+    public void setInfo(Vector2 c, GameManager.alturas alt, GameManager.flagCell f){
         cords = c;
         a = alt;
+        flag = f;
     }
     public GameManager.alturas getAltura(){
         return a;
@@ -39,6 +41,12 @@ public class casillaInfo : MonoBehaviour
     }
     public void setFlip(bool state){
         flip = state;
+    }
+    public GameManager.flagCell getFlag(){
+        return flag;
+    }
+    public void setFlip(GameManager.flagCell f){
+        flag = f;
     }
 
 }
