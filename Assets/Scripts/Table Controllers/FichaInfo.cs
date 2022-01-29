@@ -8,13 +8,9 @@ public class FichaInfo : MonoBehaviour
     Vector2 cords;
     fichas f;
 
-    int rango;
-    int dmg;
-    int mov;
-
-    int vida;
+    int rango, dmg, mov, vida;
     
-    bool dead;
+    bool dead = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +25,6 @@ public class FichaInfo : MonoBehaviour
 
     public void setInfo(Vector2 c,GameManager.fichas fich){
         f = fich;
-
         cords = c;
     }
 
@@ -59,7 +54,6 @@ public class FichaInfo : MonoBehaviour
 
     public void die(){
         dead = true;
-
         GameManager.instance.removeDead();
     }
 

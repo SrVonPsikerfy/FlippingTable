@@ -150,9 +150,6 @@ public class MapManager : MonoBehaviour
                 child.transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * rSpeed);
                 //traslacion
                 CasillaInfo cas = child.GetComponent<CasillaInfo>();
-                //ficha de encima de la casilla
-                GameObject fichaCas = GameManager.GetFicha(i,j);
-                Debug.Log(fichaCas);
                 if(!cas.isFlip()){
                     if(cas.getAltura() == GameManager.alturas.valle){
                         cas.setAltura(GameManager.alturas.colina);
@@ -168,22 +165,16 @@ public class MapManager : MonoBehaviour
                     Vector3 wantedPosition = new Vector3(currentPosition.x , movementY * (int)cas.getAltura(), currentPosition.z); 
                     child.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
                 }
-                //Traslacion flags
-                if(fichaCas!=null){
-                    Debug.Log("aaaaaa");
-                    Vector3 currentPosition = fichaCas.transform.position;
-                    Vector3 wantedPosition = new Vector3(currentPosition.x , 1.0f + 0.5f * (int)cas.getAltura(), currentPosition.z); 
-                    fichaCas.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
-                }  
-                if(cas.getFlag() == GameManager.flagCell.player1){
-                    Vector3 currentPosition = player1Flag.transform.position;
-                    Vector3 wantedPosition = new Vector3(currentPosition.x , 1.0f + 0.5f * (int)cas.getAltura(), currentPosition.z); 
-                    player1Flag.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
+                    //Traslacion flags
+                if(cas.getFlag() == GameManager.flagCell.player1){  //Flip flag player2
+                    Vector3 currentFlag1Position = player1Flag.transform.position;
+                    Vector3 wantedFlag1Position = new Vector3(currentFlag1Position.x , 1.0f + 0.5f * (int)cas.getAltura(), currentFlag1Position.z); 
+                    player1Flag.transform.position = Vector3.Lerp(currentFlag1Position, wantedFlag1Position, Time.deltaTime * ySpeed);
                 }
-                else if(cas.getFlag() == GameManager.flagCell.player2){
-                    Vector3 currentPosition = player2Flag.transform.position;
-                    Vector3 wantedPosition = new Vector3(currentPosition.x , 1.0f + 0.5f * (int)cas.getAltura(), currentPosition.z); 
-                    player2Flag.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
+                else if(cas.getFlag() == GameManager.flagCell.player2){     //Flip flag player 2
+                    Vector3 currentFlag2Position = player2Flag.transform.position;
+                    Vector3 wantedFlag2Position = new Vector3(currentFlag2Position.x , 1.0f + 0.5f * (int)cas.getAltura(), currentFlag2Position.z); 
+                    player2Flag.transform.position = Vector3.Lerp(currentFlag2Position, wantedFlag2Position, Time.deltaTime * ySpeed);
                 }
             }
         }

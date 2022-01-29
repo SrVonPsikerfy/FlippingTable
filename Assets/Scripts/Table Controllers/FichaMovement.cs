@@ -19,6 +19,7 @@ public class FichaMovement : MonoBehaviour
     void Start()
     {
         info = this.gameObject.GetComponent<FichaInfo>();
+        newPos = this.transform.position;
     }
 
     // Update is called once per frame
@@ -102,12 +103,13 @@ public class FichaMovement : MonoBehaviour
                 if (info.getMovement() >= Mathf.Abs(dist.x) && info.getMovement() >= Mathf.Abs(dist.y))
                 {
                     newPos = hit.transform.position;
-
+                    
+                    Debug.Log(infCas.getAltura());
                     if (infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
                     else if (infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
                     else newPos.y = defaultPos;
 
-                    this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
+                    
                     GameManager.instance.SetFicha((int)infCas.getCords().x, (int)infCas.getCords().y, hit.transform.gameObject);
                     info.setCords(infCas.getCords());
 
@@ -138,6 +140,16 @@ public class FichaMovement : MonoBehaviour
 
             GameManager.instance.hideRange();
         }
+    }
+    void LateUpdate()
+    {
+        GameObject cell = GameManager.getCell((int)this.gameObject.GetComponent<FichaInfo>().getCords().y, (int)this.gameObject.GetComponent<FichaInfo>().getCords().x);
+        newPos = new Vector3(newPos.x, 0.9f + 0.5f * (int)cell.GetComponent<CasillaInfo>().getAltura(),newPos.z);
+        this.transform.position = Vector3.Lerp(this.transform.position, newPos, Time.deltaTime * 250);
+    }
+
+    public void setNewPos(Vector3 pos){
+        newPos = pos;
     }
 
 }

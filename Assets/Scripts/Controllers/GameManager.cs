@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public MapManager map = null;
     // private UIManager uiManager;
     int currentLevel = 0;
 
@@ -87,6 +89,11 @@ public class GameManager : MonoBehaviour
         int id = (int)turn;
         id++;
         if(uiM != null) uiM.changeId(id.ToString());
+    }
+
+    public void deadFicha(GameObject ficha){
+        if(ficha.GetComponent<FichaInfo>() != null)
+        ficha.GetComponent<FichaInfo>().die();
     }
 
     public void LevelFinished(bool playerWins)
