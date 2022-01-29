@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void changePlayer(){
-        Debug.Log(uiM);
         turn = (playerName)(((int)turn+1) % 2);
         int id = (int)turn;
         id++;
@@ -193,7 +192,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void hideRange(){
-        Debug.Log(changedCasillas.Count);
+        // Debug.Log(changedCasillas.Count);
 
         while(nChanged > 0){
 

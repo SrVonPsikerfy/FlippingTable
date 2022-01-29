@@ -4,33 +4,29 @@ using UnityEngine;
 
 public class FichaMovement : MonoBehaviour
 {
-    bool selected = false;
+    bool selected = false, moving = false;
 
     float altDif = 0.5f;
     float defaultPos = 1f;
-    float vallePos = 0.3f;
+    float vallePos = 0.5f;
     float colinaPos = 1.5f;
+
+    Vector3 newPos = new Vector3();
+
     // Start is called before the first frame update
     void Start()
     {
-
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.M)){
-
             FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
 
-
-            if(f != null){
-                f.die();
-
-                
-            }    
+            if(f != null)
+                f.die();   
         }  
 
         if (Input.GetMouseButtonDown(0))
@@ -42,48 +38,45 @@ public class FichaMovement : MonoBehaviour
    	        Physics.Raycast(ray, out hit);
 
             //asies tengo retraso mental severo by Laura
-            if(hit.transform == null)return;
+            if(hit.transform == null) return;
 
             //para codigo limpito
             CasillaInfo infCas = hit.transform.gameObject.GetComponent<CasillaInfo>();
-            FichaInfo infGeneral=this.gameObject.GetComponent<FichaInfo>();
+            FichaInfo infGeneral = this.gameObject.GetComponent<FichaInfo>();
             FichaInfo infTransf = this.transform.gameObject.GetComponent<FichaInfo>();
             FichaInfo infHit = hit.transform.gameObject.GetComponent<FichaInfo>();
 
-            if(infCas != null && selected){
+            if(infCas != null && selected && !moving){
                 
-                Vector2 dist =   infCas.getCords() -
-                    infTransf.getCords();
+                Vector2 dist = infCas.getCords() - infTransf.getCords();
 
-                    if(infGeneral.getMovement() >= dist.x &&
-                    infGeneral.getMovement() >= dist.y){
-                        Vector3 newPos = hit.transform.position;
+                if(infGeneral.getMovement() >= dist.x && infGeneral.getMovement() >= dist.y){
+                    newPos = hit.transform.position;
 
-                        if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-                        else if(infCas.getAltura() == GameManager.alturas.valle)newPos.y = vallePos;
-                        else newPos.y = defaultPos;
-                
+                    if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
+                    else if(infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
+                    else newPos.y = defaultPos;
+            
+                    this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
 
-                        this.transform.position = newPos;
+                    infTransf.setCords(infCas.getCords());
 
-                        infTransf.setCords(infCas.getCords());
-
-                        selected = false;
-
-                    }
-
-
+                    selected = false; moving = true;
+                }
             }
             else if(infHit != null){         
                 selected = (infHit.getCords() == infGeneral.getCords());
 
                 if(selected){
-                    GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>()
-                    .getCords(), this.gameObject.GetComponent<FichaInfo>().getRange());
+                    GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
+                     this.gameObject.GetComponent<FichaInfo>().getRange());
                 }
             }  
+        }
 
-
+        if(moving) {
+            this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
+            if(this.transform.position == newPos) moving = false;
         }
     }
 }

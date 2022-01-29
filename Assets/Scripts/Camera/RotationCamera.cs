@@ -41,9 +41,9 @@ public class RotationCamera : MonoBehaviour
     public void flip(){
         transform.position = mainPosition;
         transform.rotation = mainRotation;
-        if(gM.getTurn()){
+
+        if(gM.getTurn())
             alt = -1;
-        }
         else alt = 1;
         
         Quaternion camAngleY = Quaternion.AngleAxis(rotateAngle.y * alt * rotateSpeed, Vector3.up);
