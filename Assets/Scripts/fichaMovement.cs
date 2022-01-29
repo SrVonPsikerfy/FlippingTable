@@ -33,7 +33,6 @@ public class fichaMovement : MonoBehaviour
    	        Physics.Raycast(ray, out hit);
             Debug.Log(hit.transform);
 
-   	        Debug.Log("This hit at " + hit.transform.gameObject.name);
 
             if(hit.transform.gameObject.GetComponent<casillaInfo>() != null && selected){
 
@@ -43,18 +42,27 @@ public class fichaMovement : MonoBehaviour
 
                 this.transform.position = newPos;
 
+                this.transform.gameObject.GetComponent<FichaInfo>().setCords(hit.transform.gameObject.GetComponent<casillaInfo>().getCords());
+
                 selected = false;
 
-                Debug.Log("awa");
+                Debug.Log("Awa");
             }
             else if(hit.transform.gameObject.GetComponent<FichaInfo>() != null){
                 
                 if(hit.transform.gameObject.GetComponent<FichaInfo>().getCords() != 
-                this.gameObject.GetComponent<FichaInfo>().getCords()) selected = false;
+                this.gameObject.GetComponent<FichaInfo>().getCords()){
+                    selected = false;
 
-                selected = true;
+                    Debug.Log("Iwi");
+                } 
+                else{
+                    selected = true;
 
-                Debug.Log("ewe");
+                    Debug.Log("Ewe");
+                } 
+
+
             }    
         }
     }
