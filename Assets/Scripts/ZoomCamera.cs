@@ -6,30 +6,10 @@ using UnityEngine;
 public class ZoomCamera : MonoBehaviour
 {
     [SerializeField]
-    private float zoomSensitivity = 10.0f;
+    private float zoomSensitivity = 10.0f, zoomSpeed = 2.5f, zoomMin = 3.5f, zoomMax = 5f;
 
-    [SerializeField]
-    private float zoomSpeed = 2.5f;
-
-    [SerializeField]
-    private float zoomMin = 3.5f;
-
-    [SerializeField]
-    private float zoomMax = 5f;
-
-    [SerializeField]
-    private float rotateSpeed = 5f;
-
-    [Range(0.0f, 1.0f)]
-    private float smoothFactor = 0.5f;
-
-
-    public GameObject map;
-    private Camera mainCamera;
+    private Camera mainCamera = null;
     private float zoom = 0;
-
-
-    private Vector3 cameraOffset;
 
     void Awake()
     {
@@ -40,9 +20,6 @@ public class ZoomCamera : MonoBehaviour
     void Start()
     {
         zoom = mainCamera.orthographicSize = 4f;
-
-
-        cameraOffset = transform.position - map.transform.position;    
     }
 
     // Update is called once per frame
@@ -50,19 +27,10 @@ public class ZoomCamera : MonoBehaviour
     {
         zoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity;
         zoom = Mathf.Clamp(zoom, zoomMin, zoomMax);
-
     }
 
-    void LateUpdate() {
-        if (Input.GetMouseButton(2)){
-            Debug.Log("a");
-            Quaternion camAngleX = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotateSpeed, Vector3.up); 
-            cameraOffset =  camAngleX * cameraOffset;
-        }
-
-        transform.position = Vector3.Slerp(transform.position, cameraOffset, smoothFactor);
-        mainCamera.orthographicSize = Mathf.Lerp (mainCamera.orthographicSize, zoom, Time.deltaTime * zoomSpeed);
-
-        transform.LookAt(map.transform);
+    void LateUpdate() 
+    {
+        mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, zoom, Time.deltaTime * zoomSpeed);
     }
 }

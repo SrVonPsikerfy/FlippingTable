@@ -35,13 +35,10 @@ public class MapManager : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-
-
+        //Diferencia de rotacion maxima entre quaterniones origen y destino por fallo de redondeo 
         float difference = Mathf.Abs(GameManager.getCell(size-1,size-1).transform.rotation.x - wantedRotation.x);
         if (Input.GetKeyDown(KeyCode.F) && flipDone){
             flipDone = false;
-            Debug.Log(topSide);
-
             wantedRotation = (topSide)? Quaternion.Euler(-90,0,0): Quaternion.Euler(90,0,0);
             topSide = !topSide;
         }
@@ -49,12 +46,29 @@ public class MapManager : MonoBehaviour
             flipDone = true;
             k = 0;
             countdown = delay;
-            resetFlip();
+            resetFlip();    //Resetea los tiles para que se hagan flip en el proximo flipeo
         }
 
         if(!flipDone) flipMap();
     }
-
+    void createCell(ref GameObject cases,out alturas a, int rng, float auxX, float auxZ){
+        GameObject obj; 
+        if(rng <= 80){ //Llano
+            a = alturas.llano;
+            obj = prefabLlano;
+        } 
+        else if(rng > 80 && rng <= 90) {    //Valle
+            a = alturas.valle;
+            obj = prefabValle;
+        }
+        else {  //Colina
+            a = alturas.colina;
+            obj = prefabColina;
+        }
+        cases = Instantiate(obj, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
+        cases.transform.Rotate(new Vector3(90, 0 , 0));
+        cases.transform.parent = this.transform; //Asignar parent al objeto vacio Map
+    }
     void generateMap(){
 
         float init = -size/2;
@@ -64,26 +78,12 @@ public class MapManager : MonoBehaviour
         if(prefabLlano != null && prefabColina != null && prefabLlano != null ){
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
-
+                    //Altura de cadad casilla
                     GameManager.alturas a;
                     int rng = Random.Range(0,100);
 
-                    if(rng <= 80){
-                        a = alturas.llano;
-                        cases = Instantiate(prefabLlano, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
-                    } 
-                    else if(rng > 80 && rng <= 90) {
-                        a = alturas.valle;
-                        cases = Instantiate(prefabValle, new Vector3(auxX, movementY* (int)a , auxZ), Quaternion.identity);
-                    }
-                    else {
-                        a = alturas.colina;
-                        cases = Instantiate(prefabColina, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
-                    }
-
-                    cases.transform.Rotate(new Vector3(90, 0 , 0));
-
-                    cases.transform.parent = this.transform;
+                    createCell(ref cases, out a, rng, auxX, auxZ);
+                    //Asignacion de propiedades de cada casilla
                     Vector2 pos = new Vector2(j,i);
                     GameManager.addCell(pos, cases, a);
                     casillaInfo cas = cases.GetComponent<casillaInfo>();
@@ -99,17 +99,20 @@ public class MapManager : MonoBehaviour
     }
 
     void flipMap(){
+        //delay entre cada flip diagonal del tablero
         countdown -= Time.deltaTime;
         if(countdown <= 0){
             countdown = delay;
             k++;
         }    
+        //Seguir flip de las diagonales anteriores hasta terminar
         for(int i = k; i >= 0; i--)
             flipDiagonal(i);
     }
 
     
     void flipDiagonal(int k){
+        //update de posicion y rotacion de la diagonal k
         for(int j = 0 ; j <= k ; j++ ) {
             int i = k - j;
             if( i < size && j < size ) {
@@ -137,7 +140,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    void resetFlip(){
+    void resetFlip(){ 
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 GameObject child = GameManager.getCell(i,j);
