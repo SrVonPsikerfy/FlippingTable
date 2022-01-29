@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using alturas = GameManager.alturas;
-public class MapManager : MonoBehaviour
-{
+public class MapManager : MonoBehaviour {
     //Public
     [SerializeField]
     int size = GameManager.tableroSize; 
-
     public GameObject prefabColina = null;
     public GameObject prefabLlano = null;
     public GameObject prefabValle = null;
-    [Header("delay")]
+    [Header("Delay")]
     public float delay = 0.5f;
     public float rSpeed = 50;
     [Header("Traslacion")]
@@ -27,7 +25,6 @@ public class MapManager : MonoBehaviour
     int k = 0;  //diagonal inicial
     Vector3 yVel = Vector3.zero;
 
-
     void Start(){
         countdown = delay;
         generateMap();
@@ -35,13 +32,9 @@ public class MapManager : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-
-
         float difference = Mathf.Abs(GameManager.getCell(size-1,size-1).transform.rotation.x - wantedRotation.x);
         if (Input.GetKeyDown(KeyCode.F) && flipDone){
             flipDone = false;
-            Debug.Log(topSide);
-
             wantedRotation = (topSide)? Quaternion.Euler(-90,0,0): Quaternion.Euler(90,0,0);
             topSide = !topSide;
         }
@@ -55,8 +48,25 @@ public class MapManager : MonoBehaviour
         if(!flipDone) flipMap();
     }
 
+    void createCell(ref GameObject cases,out alturas a, int rng, float auxX, float auxZ){
+        GameObject obj; 
+        if(rng <= 80){
+            a = alturas.llano;
+            obj = prefabLlano;
+        } 
+        else if(rng > 80 && rng <= 90) {
+            a = alturas.valle;
+            obj = prefabValle;
+        }
+        else {
+            a = alturas.colina;
+            obj = prefabColina;
+        }
+        cases = Instantiate(obj, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
+        cases.transform.Rotate(new Vector3(90, 0 , 0));
+        cases.transform.parent = this.transform;
+    }
     void generateMap(){
-
         float init = -size/2;
 
         float auxX = init, auxZ = init;
@@ -64,32 +74,15 @@ public class MapManager : MonoBehaviour
         if(prefabLlano != null && prefabColina != null && prefabLlano != null ){
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
-
-                    GameManager.alturas a;
+                    alturas a;
                     int rng = Random.Range(0,100);
+                    
+                    createCell(ref cases, out a, rng, auxX, auxZ);
 
-                    if(rng <= 80){
-                        a = alturas.llano;
-                        cases = Instantiate(prefabLlano, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
-                    } 
-                    else if(rng > 80 && rng <= 90) {
-                        a = alturas.valle;
-                        cases = Instantiate(prefabValle, new Vector3(auxX, movementY* (int)a , auxZ), Quaternion.identity);
-                    }
-                    else {
-                        a = alturas.colina;
-                        cases = Instantiate(prefabColina, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
-                    }
-
-                    cases.transform.Rotate(new Vector3(90, 0 , 0));
-
-                    cases.transform.parent = this.transform;
                     Vector2 pos = new Vector2(j,i);
                     GameManager.addCell(pos, cases, a);
                     casillaInfo cas = cases.GetComponent<casillaInfo>();
-                    if(cas != null){
-                        cas.setInfo(pos, a);
-                    }
+                    if(cas != null) cas.setInfo(pos, a);
                     auxZ++;
                 }
                 auxX++;

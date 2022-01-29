@@ -55,7 +55,6 @@ public class ZoomCamera : MonoBehaviour
 
     void LateUpdate() {
         if (Input.GetMouseButton(2)){
-            Debug.Log("a");
             Quaternion camAngleX = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotateSpeed, Vector3.up); 
             cameraOffset =  camAngleX * cameraOffset;
         }
