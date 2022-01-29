@@ -74,8 +74,8 @@ public class fichaMovement : MonoBehaviour
 
 
             }
-            else if(infHitFic != null){         
-                selected = (infHitFic.getCords() == infGeneral.getCords());
+            else if(infHit != null){         
+                selected = (infHit.getCords() == infGeneral.getCords());
 
                 if(selected){
                     GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>()
