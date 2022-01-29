@@ -16,6 +16,18 @@ public class GameManager : MonoBehaviour
         public Vector2 position;
         public GameObject cell;
     }
+    //Array para las direcciones
+    public static Vector2[] direcciones = {
+        new Vector2(1,-1),
+        new Vector2(1,0),
+        new Vector2(1,1),
+        new Vector2(0,-1),
+        new Vector2(0,0),
+        new Vector2(0,1),
+        new Vector2(-1,-1),
+        new Vector2(-1,0),
+        new Vector2(-1,1),
+    };
 
     static Casilla[,] tablero = new Casilla[tableroSize,tableroSize];
 
@@ -43,9 +55,9 @@ public class GameManager : MonoBehaviour
 
     public void LevelFinished(bool playerWins)
     {
-        //Debug.LogError("levelfinished");
-        // uiManager.FinishGame(playerWins);s
+        
     }
+    
     public int returncurrentLevel()
     {
         return currentLevel;

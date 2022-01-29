@@ -71,6 +71,10 @@ public class MapManager : MonoBehaviour
 
                     Vector2 pos = new Vector2(j,i);
                     GameManager.addCell(pos, cases, a);
+                    casillaInfo cas = cases.GetComponent<casillaInfo>();
+                    if(cas != null){
+                        cas.setInfo(pos, a);
+                    }
                     auxZ++;
                     alternate = !alternate;
                 }
