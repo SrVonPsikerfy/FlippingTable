@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum Heights { Valley, Plane, Mountain }
+
 public class playerController : MonoBehaviour
 {
-    public GameObject melee;
-    public GameObject ranged;
-    public GameObject tank;
-    public GameObject engi;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject melee, ranged, tank, engi;
 
     // Update is called once per frame
     void Update()
@@ -25,17 +19,20 @@ public class playerController : MonoBehaviour
             Vector3 pos = casillaAux.transform.position;
 
             //Hay que hacer una variable con las alturas
-            pos.y = 1.53f;
+            GameManager.alturas alt = casillaAux.GetComponent<casillaInfo>().getAltura();
+            switch(alt){
+                case GameManager.alturas.valle: pos.y = 0.5f; break;
+                case GameManager.alturas.llano: pos.y = 1f; break;
+                case GameManager.alturas.colina: pos.y = 1.5f; break;
+            }
 
             if (Input.GetKeyDown(KeyCode.A)){
-
                 GameObject g = Instantiate(melee, pos, Quaternion.identity);
 
                 FichaInfo f = g.GetComponent<FichaInfo>();
 
-                if(f != null){
-                    f.setInfo(new Vector2(0,1), GameManager.fichas.melee);
-                }  
+                if(f != null)
+                    f.setInfo(new Vector2(0,1), GameManager.fichas.melee); 
 
                 GameManager.instance.addFicha(g);  
 
@@ -46,42 +43,36 @@ public class playerController : MonoBehaviour
 
                 FichaInfo f = g.GetComponent<FichaInfo>();
 
-                if(f != null){
+                if(f != null)
                     f.setInfo(new Vector2(0,1), GameManager.fichas.ranged);
-                }  
 
                 GameManager.instance.addFicha(g);  
 
-                 f.setStats(2,1,2,1);
-
+                f.setStats(2,1,2,1);
             }
-            else if(Input.GetKeyDown(KeyCode.D)){
+            else if(Input.GetKeyDown(KeyCode.D)){                
                 GameObject g = Instantiate(tank, pos, Quaternion.identity);
 
                 FichaInfo f = g.GetComponent<FichaInfo>();
 
-                if(f != null){
+                if(f != null)
                     f.setInfo(new Vector2(0,1), GameManager.fichas.tank);
-                }  
 
                 GameManager.instance.addFicha(g);  
 
                 f.setStats(1,1,1,3);
-
             }
             else if(Input.GetKeyDown(KeyCode.R)){
                 GameObject g = Instantiate(engi, pos, Quaternion.identity);
 
                 FichaInfo f = g.GetComponent<FichaInfo>();
 
-                if(f != null){
+                if(f != null)
                     f.setInfo(new Vector2(0,1), GameManager.fichas.engineer);
-                } 
 
                 GameManager.instance.addFicha(g);  
 
                 f.setStats(1,1,1,1);
- 
             }
         }
 
