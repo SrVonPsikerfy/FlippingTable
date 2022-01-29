@@ -33,14 +33,17 @@ public class MapManager : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+
+
+        float difference = Mathf.Abs(GameManager.getCell(size-1,size-1).transform.rotation.x - wantedRotation.x);
         if (Input.GetKeyDown(KeyCode.F) && flipDone){
             flipDone = false;
             Debug.Log(topSide);
 
-            wantedRotation = (topSide)? Quaternion.Euler(90,0,0): Quaternion.Euler(-90,0,0);
+            wantedRotation = (topSide)? Quaternion.Euler(-90,0,0): Quaternion.Euler(90,0,0);
             topSide = !topSide;
         }
-        else if(GameManager.getCell(size-1,size-1).transform.rotation.x == wantedRotation.x){
+        else if(difference <= 0.02f){
             flipDone = true;
             k = 0;
             countdown = delay;
@@ -75,7 +78,7 @@ public class MapManager : MonoBehaviour
                         cases = Instantiate(prefabColina, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
                     }
 
-                    cases.transform.Rotate(new Vector3(270, 0 , 0));
+                    cases.transform.Rotate(new Vector3(90, 0 , 0));
 
                     cases.transform.parent = this.transform;
                     Vector2 pos = new Vector2(j,i);
