@@ -109,4 +109,25 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void ShowRange(Vector2 cords, int range){
+        for(int i=0; i < direcciones.Length; i++){
+            Vector2 newCord = cords + (direcciones[i] * range);
+
+            if(validCords(cords)){
+                GameObject g = tablero[(int)cords.y,(int) cords.x].cell;
+
+                Material m = g.GetComponent<Material>();
+
+                m.SetColor("_Color",Color.white);
+            }
+        }
+    }
+
+    public bool validCords(Vector2 cord){
+        bool valid = cord.x >= 0 && cord.y >= 0 && 
+        cord.x < tableroSize && cord.y < tableroSize;
+
+        return valid;
+    }
 }

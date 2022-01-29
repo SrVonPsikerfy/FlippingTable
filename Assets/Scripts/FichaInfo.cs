@@ -62,4 +62,8 @@ public class FichaInfo : MonoBehaviour
     public bool getDead(){
         return dead;
     }
+
+    public int getRange(){
+        return rango;
+    }
 }

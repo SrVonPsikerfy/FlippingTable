@@ -65,9 +65,14 @@ public class fichaMovement : MonoBehaviour
                 this.gameObject.GetComponent<FichaInfo>().getCords()){
                     selected = false;
 
+                    
                 } 
                 else{
                     selected = true;
+
+
+                    GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>()
+                    .getCords(), this.gameObject.GetComponent<FichaInfo>().getRange());
                 } 
 
 
