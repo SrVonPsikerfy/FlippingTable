@@ -6,6 +6,8 @@ public class casillaInfo : MonoBehaviour
 {
     Vector2 cords;
     GameManager.alturas a;
+
+    bool flip = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +31,15 @@ public class casillaInfo : MonoBehaviour
         a = alt;
     }
 
-    
-
     public Vector2 getCords(){
         return cords;
     }
+    public bool isFlip(){
+        return flip;
+    }
+    public void setFlip(bool state){
+        flip = state;
+    }
+
+    
 }

@@ -15,7 +15,8 @@ public class MapManager : MonoBehaviour
     [Header("delay")]
     public float delay = 0.5f;
     public float rSpeed = 50;
-    public Vector3 yVel = Vector3.zero;
+    [Header("Traslacion")]
+    public float ySpeed = 0.1f;
 
     float movementY = 0.5f;
     //Privates
@@ -24,6 +25,7 @@ public class MapManager : MonoBehaviour
     bool topSide = true;    //Esta cara Arriba
     float countdown;
     int k = 0;  //diagonal inicial
+    Vector3 yVel = Vector3.zero;
 
 
     void Start(){
@@ -47,6 +49,7 @@ public class MapManager : MonoBehaviour
             flipDone = true;
             k = 0;
             countdown = delay;
+            resetFlip();
         }
 
         if(!flipDone) flipMap();
@@ -116,18 +119,30 @@ public class MapManager : MonoBehaviour
                 child.transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * rSpeed);
                 //traslacion
                 casillaInfo cas = child.GetComponent<casillaInfo>();
-                // if(cas.getAltura() == GameManager.alturas.valle){
-                //     cas.setAltura(GameManager.alturas.colina);
-                //     Vector3 currentPosition = child.transform.position;
-                //     Vector3 wantedPosition = new Vector3(currentPosition.x ,currentPosition.y + child.transform.localScale.y, currentPosition.z); 
-                //     child.transform.position = Vector3.SmoothDamp(currentPosition, wantedPosition, ref yVel, Time.deltaTime);
-                // }
-                // else if(cas.getAltura()==GameManager.alturas.colina){
-                //     cas.setAltura( GameManager.alturas.valle);
-                //     Vector3 currentPosition = child.transform.position;
-                //     Vector3 wantedPosition = new Vector3(currentPosition.x ,currentPosition.y - child.transform.localScale.y, currentPosition.z); 
-                //     child.transform.position = Vector3.SmoothDamp(currentPosition, wantedPosition, ref yVel, Time.deltaTime);
-                // }
+                if(!cas.isFlip()){
+                    if(cas.getAltura() == GameManager.alturas.valle){
+                        cas.setAltura(GameManager.alturas.colina);
+                    }
+                    else if(cas.getAltura()==GameManager.alturas.colina){
+                        cas.setAltura( GameManager.alturas.valle);
+                    }
+                    cas.setFlip(true);
+                }
+                else{
+                    Vector3 currentPosition = child.transform.position;
+                    Vector3 wantedPosition = new Vector3(currentPosition.x , movementY * (int)cas.getAltura(), currentPosition.z); 
+                    child.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
+                    }
+            }
+        }
+    }
+
+    void resetFlip(){
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                GameObject child = GameManager.getCell(i,j);
+                casillaInfo cas = child.GetComponent<casillaInfo>();
+                cas.setFlip(false);
             }
         }
     }
