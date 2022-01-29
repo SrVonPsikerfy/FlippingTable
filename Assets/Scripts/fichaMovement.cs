@@ -33,6 +33,7 @@ public class fichaMovement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            GameManager.instance.hideRange();
   	        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
    	        RaycastHit hit;
 
@@ -66,6 +67,11 @@ public class fichaMovement : MonoBehaviour
             }
             else if(infHitFic != null){         
                 selected = (infHitFic.getCords() == infGeneral.getCords());
+
+                if(selected){
+                    GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>()
+                    .getCords(), this.gameObject.GetComponent<FichaInfo>().getRange());
+                }
             }  
         }
     }

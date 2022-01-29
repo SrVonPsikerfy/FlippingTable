@@ -2,11 +2,16 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     // private UIManager uiManager;
     int currentLevel = 0;
+
+    public Material[] valleSelectedMaterial = new Material[2];
+    public Material[] llanoSelectedMaterial = new Material[2];
+    public Material[] colinaSelectedMaterial = new Material[2];
 
     public enum alturas {valle =  -1, llano = 0, colina = 1};
     public enum fichas {ranged, melee, tank, engineer, none};
@@ -34,7 +39,12 @@ public class GameManager : MonoBehaviour
     static Casilla[,] tablero = new Casilla[tableroSize,tableroSize];
 
     List<GameObject> currentFichas = new List<GameObject>();
+    List<KeyValuePair<MeshRenderer,alturas>>changedCasillas = new List<KeyValuePair<MeshRenderer,alturas>>();
     int nFichas = 0;
+    int nChanged = 0;
+    public Material[] valleInitMaterial = new Material[2];
+    public Material[] llanoInitMaterial = new Material[2];
+     public Material[] colinaInitMaterial = new Material[2];
     private void Awake()
     {
         //Cosa que viene en los apuntes para que el gamemanager no se destruya entre escenas
@@ -96,7 +106,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void removeDead(){
-        Debug.Log("Awa de Uwu");
 
         for(int i = 0; i < nFichas;i++){
             if(currentFichas[i].GetComponent<FichaInfo>().getDead()){
@@ -114,17 +123,77 @@ public class GameManager : MonoBehaviour
         for(int i=0; i < direcciones.Length; i++){
             Vector2 newCord = cords + (direcciones[i] * range);
 
-            if(validCords(cords)){
-                GameObject g = tablero[(int)cords.y,(int) cords.x].cell;
+            if(validCords(newCord)){
 
-                Material m = g.GetComponent<Material>();
+                GameObject g = tablero[(int)newCord.y,(int) newCord.x].cell;
 
-                m.SetColor("_Color",Color.white);
+                alturas a = tablero[(int)newCord.y,(int) newCord.x].altura;
+
+                KeyValuePair<MeshRenderer,alturas> p;
+
+                if(a == alturas.valle){
+                    MeshRenderer mes = g.gameObject.GetComponent<MeshRenderer>();
+
+                    for(int index = 0; index < mes.materials.Length; index++){
+                        mes.materials = valleSelectedMaterial;
+                    }
+
+                    p = new KeyValuePair<MeshRenderer,alturas>(mes,a);
+                    changedCasillas.Add(p);
+                }
+                else if(a == alturas.llano){
+                    MeshRenderer mes = g.gameObject.GetComponent<MeshRenderer>();
+
+                    for(int index = 0; index < mes.materials.Length; index++){
+                        mes.materials = llanoSelectedMaterial;
+                    }
+
+                    p = new KeyValuePair<MeshRenderer,alturas>(mes,a);
+                    changedCasillas.Add(p);
+                }
+                else{
+                    MeshRenderer mes = g.gameObject.GetComponent<MeshRenderer>();
+
+                    for(int index = 0; index < mes.materials.Length; index++){
+                        mes.materials = colinaSelectedMaterial;
+                    }
+
+                    p = new KeyValuePair<MeshRenderer,alturas>(mes,a);
+                    changedCasillas.Add(p);
+                }
+
+                nChanged++;
             }
         }
     }
 
+    public void hideRange(){
+        Debug.Log(changedCasillas.Count);
+
+        while(nChanged > 0){
+
+            if(changedCasillas[nChanged - 1].Value == alturas.valle){
+
+                changedCasillas[nChanged - 1].Key.materials = valleInitMaterial;
+
+            }
+            else if(changedCasillas[nChanged - 1].Value== alturas.llano){
+
+                changedCasillas[nChanged - 1].Key.materials = llanoInitMaterial;
+            }
+            else{
+                changedCasillas[nChanged - 1].Key.materials = colinaInitMaterial;
+            }
+
+            changedCasillas.RemoveAt(nChanged - 1);
+            
+            nChanged--;
+        }
+
+    }
+
     public bool validCords(Vector2 cord){
+
         bool valid = cord.x >= 0 && cord.y >= 0 && 
         cord.x < tableroSize && cord.y < tableroSize;
 
