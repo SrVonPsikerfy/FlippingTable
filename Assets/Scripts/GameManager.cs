@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     public enum alturas {valle =  -1, llano = 0, colina = 1};
     public enum fichas {ranged, melee, tank, engineer, none};
-    public static int tableroSize = 9;
+    public static int tableroSize = 10;
     public struct Casilla{
         public alturas altura;
         public fichas ficha;
