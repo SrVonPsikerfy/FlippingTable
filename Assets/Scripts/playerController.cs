@@ -35,7 +35,9 @@ public class playerController : MonoBehaviour
 
                 if(f != null){
                     f.setInfo(new Vector2(0,1), GameManager.fichas.melee);
-                }    
+                }  
+
+                GameManager.instance.addFicha(g);  
             }
             else if(Input.GetKeyDown(KeyCode.S)){
                 GameObject g = Instantiate(ranged, pos, Quaternion.identity);
@@ -45,6 +47,9 @@ public class playerController : MonoBehaviour
                 if(f != null){
                     f.setInfo(new Vector2(0,1), GameManager.fichas.ranged);
                 }  
+
+                GameManager.instance.addFicha(g);  
+
             }
             else if(Input.GetKeyDown(KeyCode.D)){
                 GameObject g = Instantiate(tank, pos, Quaternion.identity);
@@ -54,6 +59,9 @@ public class playerController : MonoBehaviour
                 if(f != null){
                     f.setInfo(new Vector2(0,1), GameManager.fichas.tank);
                 }  
+
+                 GameManager.instance.addFicha(g);  
+
             }
             else if(Input.GetKeyDown(KeyCode.R)){
                 GameObject g = Instantiate(engi, pos, Quaternion.identity);
@@ -62,7 +70,10 @@ public class playerController : MonoBehaviour
 
                 if(f != null){
                     f.setInfo(new Vector2(0,1), GameManager.fichas.engineer);
-                }  
+                } 
+
+                GameManager.instance.addFicha(g);  
+ 
             }
         }
 

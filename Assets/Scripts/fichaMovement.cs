@@ -21,13 +21,24 @@ public class fichaMovement : MonoBehaviour
     void Update()
     {
 
-          if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.M)){
+
+
+            FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
+
+            if(f != null){
+                f.die();
+
+                
+            }    
+        }  
+
+        if (Input.GetMouseButtonDown(0))
         {
   	        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
    	        RaycastHit hit;
    	        // Casts the ray and get the first game object hit
    	        Physics.Raycast(ray, out hit);
-            Debug.Log(hit.transform);
 
 
             if(hit.transform.gameObject.GetComponent<casillaInfo>() != null && selected){
@@ -47,7 +58,6 @@ public class fichaMovement : MonoBehaviour
 
                 selected = false;
 
-                Debug.Log("Awa");
             }
             else if(hit.transform.gameObject.GetComponent<FichaInfo>() != null){
                 
@@ -55,16 +65,15 @@ public class fichaMovement : MonoBehaviour
                 this.gameObject.GetComponent<FichaInfo>().getCords()){
                     selected = false;
 
-                    Debug.Log("Iwi");
                 } 
                 else{
                     selected = true;
-
-                    Debug.Log("Ewe");
                 } 
 
 
-            }    
+            }  
+
+
         }
     }
 

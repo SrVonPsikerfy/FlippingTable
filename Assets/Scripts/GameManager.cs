@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -31,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     static Casilla[,] tablero = new Casilla[tableroSize,tableroSize];
 
+    List<GameObject> currentFichas = new List<GameObject>();
+    int nFichas = 0;
     private void Awake()
     {
         //Cosa que viene en los apuntes para que el gamemanager no se destruya entre escenas
@@ -79,5 +83,30 @@ public class GameManager : MonoBehaviour
     //get theGameObject from a Cell
     public static GameObject getCell(int i, int j){
         return tablero[i,j].cell;
+    }
+
+    public void addFicha(GameObject obj){
+        currentFichas.Add(obj);
+
+        nFichas++;
+    }
+
+    public GameObject getFichas(int indice){
+        return currentFichas[indice];
+    }
+
+    public void removeDead(){
+        Debug.Log("Awa de Uwu");
+
+        for(int i = 0; i < nFichas;i++){
+            if(currentFichas[i].GetComponent<FichaInfo>().getDead()){
+
+                Destroy(currentFichas[i]);
+
+                currentFichas.RemoveAt(i);
+
+                nFichas--;
+            }
+        }
     }
 }
