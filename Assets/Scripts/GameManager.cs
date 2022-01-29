@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Material[] colinaSelectedMaterial = new Material[2];
 
     public enum alturas {valle =  -1, llano = 0, colina = 1};
+    public enum playerName { player1, player2};
     public enum fichas {ranged, melee, tank, engineer, none};
     public static int tableroSize = 10;
     public struct Casilla{
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
         public Vector2 position;
         public GameObject cell;
     }
+
+    private UIManager uiM;
     //Array para las direcciones
     public static Vector2[] direcciones = {
         new Vector2(1,-1),
@@ -35,36 +38,44 @@ public class GameManager : MonoBehaviour
         new Vector2(-1,0),
         new Vector2(-1,1),
     };
-
+    private playerName turn;
     static Casilla[,] tablero = new Casilla[tableroSize,tableroSize];
 
     List<GameObject> currentFichas = new List<GameObject>();
     List<KeyValuePair<MeshRenderer,alturas>>changedCasillas = new List<KeyValuePair<MeshRenderer,alturas>>();
     int nFichas = 0;
-    int nChanged = 0;
-    public Material[] valleInitMaterial = new Material[2];
-    public Material[] llanoInitMaterial = new Material[2];
-     public Material[] colinaInitMaterial = new Material[2];
     private void Awake()
     {
         //Cosa que viene en los apuntes para que el gamemanager no se destruya entre escenas
-        if (instance == null)
-        {
+        if (instance == null){
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else
-        {
+        else{
             Destroy(this.gameObject);
         }
+
+        turn = playerName.player2;
     }
 
+    public bool getTurn(){
+        return turn != playerName.player1;
+    }
     public void ChangeScene(string name)
     {
 		if (name != "Transition" && name!= "Main Menu" && name!= "Cinematic_Video") currentLevel++;
         if (name == "Main Menu") currentLevel = 0;
         SceneManager.LoadScene(name);
         Time.timeScale = 1f; //Restaurar la ejecucion en caso de que esté pausado el juego.
+    }
+
+    public void changePlayer(){
+        Debug.Log(uiM);
+        turn = (playerName)(((int)turn+1) % 2);
+        int id = (int)turn;
+        id++;
+        if(uiM != null) uiM.changeId(id.ToString());
+        
     }
 
     public void LevelFinished(bool playerWins)
@@ -77,6 +88,10 @@ public class GameManager : MonoBehaviour
         return currentLevel;
     }
 
+
+    public void SetUIManager(UIManager ui){
+        uiM = ui;
+    }
     //We store all the information about the table
     public static void addCell(Vector2 pos, GameObject obj, alturas alt){
         Casilla c;

@@ -21,13 +21,15 @@ public class fichaMovement : MonoBehaviour
     void Update()
     {
 
-        //para codigo limpito
-        FichaInfo infTransf = this.transform.gameObject.GetComponent<FichaInfo>();
-        FichaInfo infGeneral=this.gameObject.GetComponent<FichaInfo>();
-
         if (Input.GetKeyDown(KeyCode.M)){
-            if(infGeneral != null){
-                infGeneral.die();                
+
+            FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
+
+
+            if(f != null){
+                f.die();
+
+                
             }    
         }  
 
@@ -36,27 +38,32 @@ public class fichaMovement : MonoBehaviour
             GameManager.instance.hideRange();
   	        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
    	        RaycastHit hit;
-
    	        // Casts the ray and get the first game object hit
    	        Physics.Raycast(ray, out hit);
 
+            //asies tengo retraso mental severo by Laura
+            if(hit.transform == null)return;
+
+            //para codigo limpito
             casillaInfo infCas = hit.transform.gameObject.GetComponent<casillaInfo>();
-            FichaInfo infHitFic=hit.transform.gameObject.GetComponent<FichaInfo>();
+            FichaInfo infGeneral=this.gameObject.GetComponent<FichaInfo>();
+            FichaInfo infTransf = this.transform.gameObject.GetComponent<FichaInfo>();
+            FichaInfo infHit = hit.transform.gameObject.GetComponent<FichaInfo>();
 
             if(infCas != null && selected){
                 
-                Vector2 dist = infCas.getCords() - infTransf.getCords();
+                Vector2 dist =   infCas.getCords() -
+                    infTransf.getCords();
 
                     if(infGeneral.getMovement() >= dist.x &&
                     infGeneral.getMovement() >= dist.y){
                         Vector3 newPos = hit.transform.position;
 
                         if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-
                         else if(infCas.getAltura() == GameManager.alturas.valle)newPos.y = vallePos;
-
                         else newPos.y = defaultPos;
                 
+
                         this.transform.position = newPos;
 
                         infTransf.setCords(infCas.getCords());
@@ -64,6 +71,8 @@ public class fichaMovement : MonoBehaviour
                         selected = false;
 
                     }
+
+
             }
             else if(infHitFic != null){         
                 selected = (infHitFic.getCords() == infGeneral.getCords());
@@ -73,6 +82,8 @@ public class fichaMovement : MonoBehaviour
                     .getCords(), this.gameObject.GetComponent<FichaInfo>().getRange());
                 }
             }  
+
+
         }
     }
 }
