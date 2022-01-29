@@ -55,7 +55,7 @@ public class playerController : MonoBehaviour
                     f.setInfo(new Vector2(0,1), GameManager.fichas.tank);
                 }  
             }
-            else if(Input.GetKeyDown(KeyCode.F)){
+            else if(Input.GetKeyDown(KeyCode.R)){
                 GameObject g = Instantiate(engi, pos, Quaternion.identity);
 
                 FichaInfo f = g.GetComponent<FichaInfo>();

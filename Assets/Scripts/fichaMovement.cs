@@ -8,6 +8,8 @@ public class fichaMovement : MonoBehaviour
 
     float altDif = 0.5f;
     float defaultPos = 1.5f;
+    float vallePos = 1.0f;
+    float colinaPos = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +35,9 @@ public class fichaMovement : MonoBehaviour
                 Vector3 newPos = hit.transform.position;
 
                 if(hit.transform.gameObject.GetComponent<casillaInfo>().getAltura() ==
-                 GameManager.alturas.colina) newPos.y = this.transform.position.y + altDif;
+                 GameManager.alturas.colina) newPos.y = colinaPos;
                 else if(hit.transform.gameObject.GetComponent<casillaInfo>().getAltura() ==
-                 GameManager.alturas.valle)newPos.y = this.transform.position.y - altDif;
+                 GameManager.alturas.valle)newPos.y = vallePos;
                 else newPos.y = defaultPos;
                 
 
