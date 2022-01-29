@@ -11,6 +11,8 @@ public class FichaInfo : MonoBehaviour
     int rango;
     int dmg;
     int mov;
+
+    int vida;
     
     bool dead;
     // Start is called before the first frame update
@@ -43,12 +45,14 @@ public class FichaInfo : MonoBehaviour
         return f;
     }
 
-    public void setStats(int r, int d, int m){
+    public void setStats(int r, int d, int m, int v){
         rango = r;
 
         dmg = d;
 
         mov = m;
+
+        vida = v;
 
         dead = false;
     }
@@ -65,5 +69,9 @@ public class FichaInfo : MonoBehaviour
 
     public int getRange(){
         return rango;
+    }
+
+    public int getMovement(){
+        return mov;
     }
 }
