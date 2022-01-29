@@ -6,18 +6,18 @@ public class GameManager : MonoBehaviour
     // private UIManager uiManager;
     int currentLevel = 0;
 
-    public enum alturas {valle, llano, colina};
-    public enum fichas {ranged, melee, tank, engineer};
-
-    struct Casilla{
-        alturas altura;
-        fichas fichas = null;
-        bool ocupada = false;
-        Vector2 position;
-        GameObject cell;
+    public enum alturas {valle =  -1, llano = 0, colina = 1};
+    public enum fichas {ranged, melee, tank, engineer, none};
+    public static int tableroSize = 9;
+    public struct Casilla{
+        public alturas altura;
+        public fichas ficha;
+        public bool ocupada;
+        public Vector2 position;
+        public GameObject cell;
     }
 
-    Casilla[][] tablero = null;
+    static Casilla[,] tablero = new Casilla[tableroSize,tableroSize];
 
     private void Awake()
     {
@@ -44,20 +44,28 @@ public class GameManager : MonoBehaviour
     public void LevelFinished(bool playerWins)
     {
         //Debug.LogError("levelfinished");
-        // uiManager.FinishGame(playerWins);
+        // uiManager.FinishGame(playerWins);s
     }
     public int returncurrentLevel()
     {
         return currentLevel;
     }
 
-    public void addCell(Vector2 pos, GameObject obj, alturas alt){
+    //We store all the information about the table
+    public static void addCell(Vector2 pos, GameObject obj, alturas alt){
         Casilla c;
 
         c.position = pos;
         c.cell = obj;
         c.altura = alt;
+        c.ocupada = false;
+        c.ficha = fichas.none;    
 
-        tablero[pos.y][pos.x] = c;
+        tablero[(int)pos.y,(int)pos.x] = c;
+    }
+
+    //get theGameObject from a Cell
+    GameObject getCell(int i, int j){
+        return tablero[i,j].cell;
     }
 }

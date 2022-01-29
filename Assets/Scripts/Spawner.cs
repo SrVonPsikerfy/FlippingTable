@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using alturas = GameManager.alturas;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    int size; 
-    
+    int size = GameManager.tableroSize; 
+
     public GameObject prefabW = null;
 
     public GameObject prefabB = null;
@@ -22,8 +23,20 @@ public class Spawner : MonoBehaviour
         if(prefabB != null && prefabW != null ){
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
-                    if(alternate) 
-                        cases = Instantiate(prefabB, new Vector3(auxX, 0 , auxZ), Quaternion.identity);    
+                    if(alternate){ 
+                        int rng = Random.Range(0,10);
+
+                        GameManager.alturas a;
+
+                        if(rng <= 5) a = alturas.llano;
+                        else if(rng > 5 && rng <= 7) a = alturas.valle;
+                        else a = alturas.colina;
+                        Vector3 ss = prefabB.transform.localScale;
+                        cases = Instantiate(prefabB, new Vector3(auxX, ss.y * (int)a , auxZ), Quaternion.identity);
+
+                        Vector2 pos = new Vector2(j,i);
+                        GameManager.addCell(pos, cases, a);
+                    }    
                     else 
                         cases = Instantiate(prefabW, new Vector3(auxX, 0 , auxZ), Quaternion.identity);
 
