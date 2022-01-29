@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Melee  : TokenBehaviour
 {
+    
     GameManager gM;
     void Start(){
         gM = GameManager.instance;
     }
-
     // Update is called once per frame
     void Update() {
         
@@ -18,6 +18,7 @@ public class Melee  : TokenBehaviour
     }
 
     public override void Attack(){
-        Debug.Log("Attack Melee");
+        if(GameManager.getTableroSide()) Debug.Log("Attack Melee");
+        else Debug.Log("Heal attack");
     }
 }

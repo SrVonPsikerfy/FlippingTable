@@ -41,6 +41,8 @@ public class MapManager : MonoBehaviour
         //Diferencia de rotacion maxima entre quaterniones origen y destino por fallo de redondeo 
         float difference = Mathf.Abs(GameManager.getCell(size-1,size-1).transform.rotation.x - wantedRotation.x);
         if (Input.GetKeyDown(KeyCode.F) && flipDone){
+            //Cambia la info de en que lado del tablero se está jugando
+            GameManager.setTableroSide();
             flipDone = false;
             wantedRotation = (topSide)? Quaternion.Euler(-90,0,0): Quaternion.Euler(90,0,0);
             topSide = !topSide;

@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    //Controla en que lado del escenario está para controlar que ataque tiene
+    public static bool sideUp = true;
+
     public MapManager map = null;
     // private UIManager uiManager;
     int currentLevel = 0;
@@ -257,4 +260,7 @@ public class GameManager : MonoBehaviour
     public static GameObject GetFicha(int x, int y){
         return tablero[y,x].fichaObj;
     }
+
+    public static void setTableroSide() { sideUp = !sideUp;}
+    public static bool getTableroSide() { return sideUp;}
 }
