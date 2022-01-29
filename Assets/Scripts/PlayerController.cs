@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour
             //Hay que hacer una variable con las alturas
             GameManager.alturas alt = casillaAux.GetComponent<CasillaInfo>().getAltura();
             switch(alt){
-                case GameManager.alturas.valle: pos.y = 0.5f; break;
-                case GameManager.alturas.llano: pos.y = 1f; break;
-                case GameManager.alturas.colina: pos.y = 1.5f; break;
+                case GameManager.alturas.valle: pos.y = 0.4f; break;
+                case GameManager.alturas.llano: pos.y = 0.9f; break;
+                case GameManager.alturas.colina: pos.y = 1.4f; break;
             }
 
             if (Input.GetKeyDown(KeyCode.A)){
