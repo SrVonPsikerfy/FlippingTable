@@ -71,8 +71,8 @@ public class MapManager : MonoBehaviour
     }
     void generateMap(){
 
-        float init = -size/2;
-
+        float init = -((float)size)/2.0f;
+        if(size%2 == 0) init += 0.5f;
         float auxX = init, auxZ = init;
         GameObject cases = null;
         if(prefabLlano != null && prefabColina != null && prefabLlano != null ){

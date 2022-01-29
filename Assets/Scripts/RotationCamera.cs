@@ -18,6 +18,8 @@ public class RotationCamera : MonoBehaviour
     private Camera mainCamera = null;
     private Vector3 cameraOffset = new Vector3();
     
+    private Vector3 mainPosition;
+    private Quaternion mainRotation;
 
     Vector3 rotateAngle = new Vector3(0, 180, 0);
 
@@ -30,12 +32,15 @@ public class RotationCamera : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        mainRotation = transform.rotation;
+        mainPosition = transform.position;
         cameraOffset = transform.position - map.transform.position;    
     }
     
     public void flip(){
-    
+        transform.position = mainPosition;
+        transform.rotation = mainRotation;
         if(gM.getTurn()){
             alt = -1;
         }

@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
         int id = (int)turn;
         id++;
         if(uiM != null) uiM.changeId(id.ToString());
-        
     }
 
     public void LevelFinished(bool playerWins)
@@ -94,6 +93,9 @@ public class GameManager : MonoBehaviour
         return currentLevel;
     }
 
+    void Update(){
+        Debug.Log(uiM);
+    }
 
     public void SetUIManager(UIManager ui){
         uiM = ui;
