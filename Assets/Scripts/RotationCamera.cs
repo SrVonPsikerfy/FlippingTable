@@ -19,7 +19,7 @@ public class RotationCamera : MonoBehaviour
     private Vector3 cameraOffset = new Vector3();
     
 
-    Vector3 rotateAngle = new Vector3(0, 720, 0);
+    Vector3 rotateAngle = new Vector3(0, 180, 0);
 
     void Awake()
     {
@@ -45,12 +45,7 @@ public class RotationCamera : MonoBehaviour
         cameraOffset = camAngleY * cameraOffset;
     }
 
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.C)) {
-            gM.changePlayer();
-            flip();
-        }
-        
+    void Update(){        
     }
 
 

@@ -62,13 +62,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void changePlayer(){
-
-        int auxId = (int)turn;
-        auxId = (auxId + 1) % 2; 
-        turn = (playerName)auxId;
+        Debug.Log(uiM);
+        turn = (playerName)(((int)turn+1) % 2);
         int id = (int)turn;
         id++;
-        Debug.Log(uiM);
         if(uiM != null) uiM.changeId(id.ToString());
         
     }

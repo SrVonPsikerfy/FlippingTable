@@ -266,8 +266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gM: {fileID: 7660743222195216571, guid: 3d35cf0969db944feb00061dc4c142e4, type: 3}
   map: {fileID: 1960324154}
-  rotateSpeed: 0.2
-  smoothFactor: 0.1
+  rotateSpeed: 5
+  smoothFactor: 0.5
 --- !u!1 &852532461
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,8 +434,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 846777385}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
