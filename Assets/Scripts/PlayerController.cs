@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if(Input.anyKey){
+            
             GameObject casillaAux = GameManager.getCell(0,1);
             this.gameObject.transform.position = new Vector3(casillaAux.transform.position.x,
             this.transform.position.y,casillaAux.transform.position.z);
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
                 if(f != null)
                     f.setInfo(new Vector2(0,1), GameManager.fichas.melee); 
 
-                GameManager.instance.addFicha(g);  
+                GameManager.instance.addFicha(new Vector2(0,1),g);  
 
                 f.setStats(1,1,1,2);
             }
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
                 if(f != null)
                     f.setInfo(new Vector2(0,1), GameManager.fichas.ranged);
 
-                GameManager.instance.addFicha(g);  
+                GameManager.instance.addFicha(new Vector2(0,1),g);  
 
                 f.setStats(2,1,2,1);
             }
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
                 if(f != null)
                     f.setInfo(new Vector2(0,1), GameManager.fichas.tank);
 
-                GameManager.instance.addFicha(g);  
+                GameManager.instance.addFicha(new Vector2(0,1),g);  
 
                 f.setStats(1,1,1,3);
             }
@@ -70,9 +71,11 @@ public class PlayerController : MonoBehaviour
                 if(f != null)
                     f.setInfo(new Vector2(0,1), GameManager.fichas.engineer);
 
-                GameManager.instance.addFicha(g);  
+                GameManager.instance.addFicha(new Vector2(0,1),g);  
 
                 f.setStats(1,1,1,1);
+           
+
             }
         }
 
