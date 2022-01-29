@@ -150,12 +150,16 @@ public class MapManager : MonoBehaviour
                 child.transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * rSpeed);
                 //traslacion
                 CasillaInfo cas = child.GetComponent<CasillaInfo>();
+                //ficha de encima de la casilla
+                GameObject fichaCas = GameManager.GetFicha(i,j);
+                Debug.Log(fichaCas);
                 if(!cas.isFlip()){
                     if(cas.getAltura() == GameManager.alturas.valle){
                         cas.setAltura(GameManager.alturas.colina);
                     }
                     else if(cas.getAltura()==GameManager.alturas.colina){
                         cas.setAltura( GameManager.alturas.valle);
+                       
                     }
                     cas.setFlip(true);
                 }
@@ -165,6 +169,12 @@ public class MapManager : MonoBehaviour
                     child.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
                 }
                 //Traslacion flags
+                if(fichaCas!=null){
+                    Debug.Log("aaaaaa");
+                    Vector3 currentPosition = fichaCas.transform.position;
+                    Vector3 wantedPosition = new Vector3(currentPosition.x , 1.0f + 0.5f * (int)cas.getAltura(), currentPosition.z); 
+                    fichaCas.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
+                }  
                 if(cas.getFlag() == GameManager.flagCell.player1){
                     Vector3 currentPosition = player1Flag.transform.position;
                     Vector3 wantedPosition = new Vector3(currentPosition.x , 1.0f + 0.5f * (int)cas.getAltura(), currentPosition.z); 

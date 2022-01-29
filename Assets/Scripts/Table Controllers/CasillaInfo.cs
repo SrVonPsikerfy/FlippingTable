@@ -7,7 +7,6 @@ public class CasillaInfo : MonoBehaviour
     Vector2 cords;
     GameManager.alturas a;
     GameManager.flagCell flag;
-    
     bool flip = false;
     // Start is called before the first frame update
     void Start()

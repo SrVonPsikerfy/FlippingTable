@@ -124,9 +124,9 @@ public class GameManager : MonoBehaviour
         return tablero[i,j].cell;
     }
 
-    public void addFicha(GameObject obj){
+    public void addFicha(Vector2 coord, GameObject obj){
         currentFichas.Add(obj);
-
+        SetFicha((int)coord.x,(int)coord.y,obj);
         nFichas++;
     }
 
@@ -241,5 +241,9 @@ public class GameManager : MonoBehaviour
         for(int i=0; i < currentFichas.Count;i++){
             Debug.Log(currentFichas[i].GetComponent<FichaInfo>().getCords());
         }
+    }
+
+    public static GameObject GetFicha(int x, int y){
+        return tablero[y,x].fichaObj;
     }
 }
