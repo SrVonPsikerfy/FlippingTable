@@ -46,9 +46,13 @@ public class GameManager : MonoBehaviour
         else{
             Destroy(this.gameObject);
         }
+
+        turn = playerName.player2;
     }
 
-
+    public bool getTurn(){
+        return turn != playerName.player1;
+    }
     public void ChangeScene(string name)
     {
 		if (name != "Transition" && name!= "Main Menu" && name!= "Cinematic_Video") currentLevel++;
@@ -57,9 +61,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f; //Restaurar la ejecucion en caso de que esté pausado el juego.
     }
 
-    public void changePlayer(playerName type){
-        turn = type;
-        int id = (int)type;
+    public void changePlayer(){
+
+        int auxId = (int)turn;
+        auxId = (auxId + 1) % 2; 
+        turn = (playerName)auxId;
+        int id = (int)turn;
         id++;
         Debug.Log(uiM);
         if(uiM != null) uiM.changeId(id.ToString());

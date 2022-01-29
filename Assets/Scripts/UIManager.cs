@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
 	
     void Start(){
         GameManager.instance.SetUIManager(this);
-        GameManager.instance.changePlayer(GameManager.playerName.player1);
+        GameManager.instance.changePlayer();
     }
 
     void Awake()
