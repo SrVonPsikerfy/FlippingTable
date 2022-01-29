@@ -74,7 +74,7 @@ public class MapManager : MonoBehaviour
         cases.transform.parent = this.transform; //Asignar parent al objeto vacio Map
     }
     void generateMap(){
-
+        
         float init = -((float)size)/2.0f;
         if(size%2 == 0) init += 0.5f;
         float auxX = init, auxZ = init;
