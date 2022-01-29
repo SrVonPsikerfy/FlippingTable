@@ -7,9 +7,9 @@ public class fichaMovement : MonoBehaviour
     bool selected = false;
 
     float altDif = 0.5f;
-    float defaultPos = 1.5f;
-    float vallePos = 1.0f;
-    float colinaPos = 2.0f;
+    float defaultPos = 1f;
+    float vallePos = 0.3f;
+    float colinaPos = 1.5f;
     // Start is called before the first frame update
     void Start()
     {

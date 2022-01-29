@@ -18,7 +18,7 @@ public class MapManager : MonoBehaviour
     [Header("Traslacion")]
     public float ySpeed = 0.1f;
 
-    float movementY = 0.5f;
+    float movementY = 0.45f;
     //Privates
     Quaternion wantedRotation = Quaternion.Euler(0,0,0);
     bool flipDone = true;   //Ha terminado el flip
