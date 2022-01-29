@@ -178,7 +178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125715696}
   m_LocalRotation: {x: 0.23911765, y: 0.36964378, z: -0.09904577, w: 0.8923991}
-  m_LocalPosition: {x: 0.41, y: 1, z: 0.41}
+  m_LocalPosition: {x: 0.42, y: 1.01, z: 0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 19237062}
@@ -282,10 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55064694cab2b4fce9643c9f1aaa2d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  melee: {fileID: 7746274022416800687, guid: 920b71968b8a04316b4c0fae395b99ae, type: 3}
-  ranged: {fileID: 106161937161441468, guid: 8a3f9266cb1e14d009ac7955e31c3556, type: 3}
-  tank: {fileID: 8440546356260532741, guid: 6e8053999f0684177b4652f0db66fd6f, type: 3}
-  engi: {fileID: 7495590607133220442, guid: dfd0a0961b3c8424c98f877ac5e88b71, type: 3}
+  melee: {fileID: 3621665688393227210, guid: d2d9811a56f0e40de90833bc7d06c61d, type: 3}
+  ranged: {fileID: 2024838555102672137, guid: 86c019e0d0a8e41f1a47e3d45987bd58, type: 3}
+  tank: {fileID: 1311514295072950148, guid: 09863e801e2fe46749b02a0bd91733a1, type: 3}
+  engi: {fileID: 6264996116297023654, guid: c78fb22e4b4c44af78bb6a64a572aeed, type: 3}
 --- !u!4 &971459162
 Transform:
   m_ObjectHideFlags: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
     type: 3}
   delay: 0.1
   rSpeed: 800
-  yVel: {x: 0, y: 0, z: 0}
+  ySpeed: 0.1
 --- !u!4 &1960324156
 Transform:
   m_ObjectHideFlags: 0

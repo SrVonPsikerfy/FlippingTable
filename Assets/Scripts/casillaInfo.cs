@@ -41,5 +41,4 @@ public class casillaInfo : MonoBehaviour
         flip = state;
     }
 
-    
 }

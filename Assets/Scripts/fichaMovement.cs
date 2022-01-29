@@ -5,6 +5,9 @@ using UnityEngine;
 public class fichaMovement : MonoBehaviour
 {
     bool selected = false;
+
+    float altDif = 0.5f;
+    float defaultPos = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,15 +18,6 @@ public class fichaMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)){
-                Debug.Log("uwu");
-
-                GameObject casillaAux = GameManager.getCell(0,1);
-                Debug.Log(casillaAux);
-                this.gameObject.transform.position = new Vector3(casillaAux.transform.position.x,
-                this.transform.position.y,casillaAux.transform.position.z);
-                
-        }
 
           if (Input.GetMouseButtonDown(0))
         {
@@ -38,7 +32,12 @@ public class fichaMovement : MonoBehaviour
 
                 Vector3 newPos = hit.transform.position;
 
-                newPos.y = 1.53f;
+                if(hit.transform.gameObject.GetComponent<casillaInfo>().getAltura() ==
+                 GameManager.alturas.colina) newPos.y = this.transform.position.y + altDif;
+                else if(hit.transform.gameObject.GetComponent<casillaInfo>().getAltura() ==
+                 GameManager.alturas.valle)newPos.y = this.transform.position.y - altDif;
+                else newPos.y = defaultPos;
+                
 
                 this.transform.position = newPos;
 

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using fichas = GameManager.fichas;
 public class FichaInfo : MonoBehaviour
 {
     Vector2 cords;
-    GameManager.fichas f;
+    fichas f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,5 +31,9 @@ public class FichaInfo : MonoBehaviour
 
     public void setCords(Vector2 newC){
         cords = newC;
+    }
+
+    public fichas getFich(){
+        return f;
     }
 }
