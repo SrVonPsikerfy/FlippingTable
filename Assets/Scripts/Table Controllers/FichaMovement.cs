@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -114,11 +114,15 @@ public class FichaMovement : MonoBehaviour
                     selected = false; moving = true;
                 }
             }
-            else
+            else if (hit.transform.gameObject != this.gameObject && selected) 
             {
                 selected = false;
-
+                GameManager.instance.hideRange();
             }
+            // else
+            // {
+            //     selected = false;
+            // }
 
             if (selected)
             {
