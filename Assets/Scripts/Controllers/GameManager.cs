@@ -100,6 +100,10 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void tokenSelected(GameObject token){
+        uiM.displayActions(token);
+    }
     
     public int returncurrentLevel()
     {

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Terraformer : TokenBehaviour
+public class Melee  : TokenBehaviour
 {
-    // Start is called before the first frame update
-
     GameManager gM;
     void Start(){
         gM = GameManager.instance;
@@ -15,18 +13,11 @@ public class Terraformer : TokenBehaviour
     void Update() {
         
     }
-
     public override void Move(){
-        Debug.Log("Move Terra");
+        Debug.Log("Move Melee");
     }
 
     public override void Attack(){
-        Debug.Log("Attack Terra");
-    }
-
-    public void Edit(){
-        // if()
-
-        Debug.Log("Funka");
+        Debug.Log("Attack Melee");
     }
 }

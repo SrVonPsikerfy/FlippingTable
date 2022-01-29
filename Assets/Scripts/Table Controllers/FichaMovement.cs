@@ -126,10 +126,11 @@ public class FichaMovement : MonoBehaviour
             //     selected = false;
             // }
 
-            if (selected)
-            {
-                GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
-                 this.gameObject.GetComponent<FichaInfo>().getRange());
+            if (selected){
+
+                GameManager.instance.tokenSelected(this.gameObject);
+                // GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
+                //  this.gameObject.GetComponent<FichaInfo>().getRange());
             }
         }
 
