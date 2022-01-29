@@ -9,12 +9,14 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     int size = GameManager.tableroSize; 
 
-    public GameObject prefabW = null;
-    public GameObject prefabB = null;
+    public GameObject prefabColina = null;
+    public GameObject prefabLlano = null;
+    public GameObject prefabValle = null;
     [Header("delay")]
     public float delay = 0.5f;
     public float rSpeed = 50;
 
+    float movementY = 0.5f;
     //Privates
     Quaternion wantedRotation = Quaternion.Euler(180,0,0);
     bool flipDone = true;   //Ha terminado el flip
@@ -51,26 +53,28 @@ public class MapManager : MonoBehaviour
         float init = -size/2;
 
         float auxX = init, auxZ = init;
-        bool alternate = true;
         GameObject cases = null;
-        if(prefabB != null && prefabW != null ){
+        if(prefabLlano != null && prefabColina != null && prefabLlano != null ){
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
 
                     GameManager.alturas a;
                     int rng = Random.Range(0,100);
 
-                    if(rng <= 80) a = alturas.llano;
-                    else if(rng > 80 && rng <= 90) a = alturas.valle;
-                    else a = alturas.colina;
+                    if(rng <= 80){
+                        a = alturas.llano;
+                        cases = Instantiate(prefabLlano, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
+                    } 
+                    else if(rng > 80 && rng <= 90) {
+                        a = alturas.valle;
+                        cases = Instantiate(prefabValle, new Vector3(auxX, movementY* (int)a , auxZ), Quaternion.identity);
+                    }
+                    else {
+                        a = alturas.colina;
+                        cases = Instantiate(prefabColina, new Vector3(auxX, movementY * (int)a , auxZ), Quaternion.identity);
+                    }
 
-                    Vector3 ss = prefabB.transform.localScale / 2;
-
-                    if(alternate){ 
-                        
-                        cases = Instantiate(prefabB, new Vector3(auxX, ss.y * (int)a , auxZ), Quaternion.identity);
-                    }    
-                    else cases = Instantiate(prefabW, new Vector3(auxX, ss.y * (int)a , auxZ), Quaternion.identity);
+                    cases.transform.Rotate(new Vector3(90, 0 , 0));
 
                     cases.transform.parent = this.transform;
                     Vector2 pos = new Vector2(j,i);
@@ -80,9 +84,7 @@ public class MapManager : MonoBehaviour
                         cas.setInfo(pos, a);
                     }
                     auxZ++;
-                    alternate = !alternate;
                 }
-                alternate = !alternate;
                 auxX++;
                 auxZ = init;
             }

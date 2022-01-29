@@ -30,6 +30,8 @@ public class fichaMovement : MonoBehaviour
    	        RaycastHit hit;
    	        // Casts the ray and get the first game object hit
    	        Physics.Raycast(ray, out hit);
+            Debug.Log(hit.transform);
+
    	        Debug.Log("This hit at " + hit.transform.gameObject.name);
 
             if(hit.transform.gameObject.GetComponent<casillaInfo>() != null){

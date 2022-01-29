@@ -470,13 +470,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563164882}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.23967744, y: -0.74646384, z: 0.34808177, w: -0.51399}
   m_LocalPosition: {x: -3.39, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: -249.1, z: 0}
 --- !u!1001 &1688054266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -576,9 +576,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 8
-  gM: {fileID: 0}
-  prefabW: {fileID: 8389367108074226332, guid: c5469dab0200f4c30bbb7f61ac228bb4, type: 3}
-  prefabB: {fileID: 4506375161648353687, guid: bfb7ddcbc586e4b2f84fcb0d0d418251, type: 3}
+  prefabColina: {fileID: 7235332170450539985, guid: 4093ac41f71cc469f90f60fbc869cb9d,
+    type: 3}
+  prefabLlano: {fileID: 2983503240730627902, guid: aeac9509ba95e4d7284093b842e35cc6,
+    type: 3}
+  prefabValle: {fileID: 1855172519841191119, guid: e6b93db05d8b04621b6e579474b5a52a,
+    type: 3}
+  delay: 0.5
   rSpeed: 250
 --- !u!4 &1960324156
 Transform:

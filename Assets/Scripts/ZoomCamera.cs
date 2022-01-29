@@ -17,6 +17,11 @@ public class ZoomCamera : MonoBehaviour
     [SerializeField]
     private float zoomMax = 5f;
 
+    [SerializeField]
+    private float rotateSpeed = 5f;
+
+
+    public GameObject map;
     private Camera mainCamera;
     private float zoom = 0;
 
@@ -40,6 +45,10 @@ public class ZoomCamera : MonoBehaviour
 
     void LateUpdate() 
     {
-         mainCamera.orthographicSize = Mathf.Lerp (mainCamera.orthographicSize, zoom, Time.deltaTime * zoomSpeed);
+
+        Quaternion camAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotateSpeed, Vector3.up); 
+        mainCamera.orthographicSize = Mathf.Lerp (mainCamera.orthographicSize, zoom, Time.deltaTime * zoomSpeed);
+
+        // transform.LookAt(map.transform);
     }
 }
