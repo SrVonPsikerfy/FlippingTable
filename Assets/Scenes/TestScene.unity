@@ -496,8 +496,8 @@ MonoBehaviour:
     type: 3}
   prefabValle: {fileID: 1855172519841191119, guid: e6b93db05d8b04621b6e579474b5a52a,
     type: 3}
-  delay: 0.5
-  rSpeed: 250
+  delay: 0.1
+  rSpeed: 800
   yVel: {x: 0, y: 0, z: 0}
 --- !u!4 &1960324156
 Transform:
