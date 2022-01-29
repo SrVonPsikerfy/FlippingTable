@@ -13,70 +13,120 @@ public class FichaMovement : MonoBehaviour
 
     Vector3 newPos = new Vector3();
 
+    FichaInfo info = new FichaInfo();
+
     // Start is called before the first frame update
     void Start()
     {
-
+        info = this.gameObject.GetComponent<FichaInfo>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M)){
+        if (Input.GetKeyDown(KeyCode.M))
+        {
             FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
 
-            if(f != null)
-                f.die();   
-        }  
+            if (f != null)
+                f.die();
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameManager.instance.hideRange();
-  	        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-   	        RaycastHit hit;
-   	        // Casts the ray and get the first game object hit
-   	        Physics.Raycast(ray, out hit);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
 
-            //asies tengo retraso mental severo by Laura
-            if(hit.transform == null) return;
-
-            //para codigo limpito
+            if (hit.transform == null) return;
             CasillaInfo infCas = hit.transform.gameObject.GetComponent<CasillaInfo>();
-            FichaInfo infGeneral = this.gameObject.GetComponent<FichaInfo>();
-            FichaInfo infTransf = this.transform.gameObject.GetComponent<FichaInfo>();
+
             FichaInfo infHit = hit.transform.gameObject.GetComponent<FichaInfo>();
 
-            if(infCas != null && selected && !moving){
-                
-                Vector2 dist = infCas.getCords() - infTransf.getCords();
+            if (hit.transform.gameObject == this.gameObject && !selected)
+            {
+                selected = true;
+                GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
+                this.gameObject.GetComponent<FichaInfo>().getRange());
+                //GameManager.instance.hideRange();
+                // Casts the ray and get the first game object hit
 
-                if(infGeneral.getMovement() >= Mathf.Abs(dist.x) && infGeneral.getMovement() >= Mathf.Abs(dist.y)){
+                //asies tengo retraso mental severo by Laura
+
+                //para codigo limpito
+
+                // if (infCas != null && selected)
+                // {
+
+                //     // Vector2 dist = infCas.getCords() - infGeneral.getCords();
+
+                //     // if (infGeneral.getMovement() >= Mathf.Abs(dist.x) && infGeneral.getMovement() >= Mathf.Abs(dist.y))
+                //     // {
+                //     //     newPos = hit.transform.position;
+
+                //     //     if (infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
+                //     //     else if (infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
+                //     //     else newPos.y = defaultPos;
+
+                //     //     this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
+                //     //     //GameManager.instance.SetFicha((int)infCas.getCords().x,(int) infCas.getCords().y, hit.transform.gameObject);
+                //     //     //Creo que esta aqui
+                //     //     infGeneral.setCords(infCas.getCords());
+
+                //     //     selected = false; moving = true;
+                //     // }
+                // }
+                // else if (infHit != null)
+                // {
+                //     // selected = (infHit.getCords() == infGeneral.getCords());
+                //     // Debug.Log(infHit.getCords());
+                //     // Debug.Log(infGeneral.getCords());
+                //     // Debug.Log(selected);
+                //     // if (selected)
+                //     // {
+                //     //     GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
+                //     //      this.gameObject.GetComponent<FichaInfo>().getRange());
+                //     // }
+                // }
+                // else
+                // {
+                //     selected = false;
+                // }
+            }
+            else if (infCas != null && selected)
+            {
+                Vector2 dist = info.getCords() - infCas.getCords();
+
+                if (info.getMovement() >= Mathf.Abs(dist.x) && info.getMovement() >= Mathf.Abs(dist.y))
+                {
                     newPos = hit.transform.position;
 
-                    if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-                    else if(infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
+                    if (infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
+                    else if (infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
                     else newPos.y = defaultPos;
-            
+
                     this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-                    GameManager.instance.SetFicha((int)infCas.getCords().x,(int) infCas.getCords().y, hit.transform.gameObject);
-                    infTransf.setCords(infCas.getCords());
+                    //GameManager.instance.SetFicha((int)infCas.getCords().x,(int) infCas.getCords().y, hit.transform.gameObject);
+                    //Creo que esta aqui
+                    info.setCords(infCas.getCords());
 
                     selected = false; moving = true;
                 }
             }
-            else if(infHit != null){         
-                selected = (infHit.getCords() == infGeneral.getCords());
+            else
+            {
+                selected = false;
+                
+            }
 
-                if(selected){
-                    GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
-                     this.gameObject.GetComponent<FichaInfo>().getRange());
-                }
-            }  
         }
 
-        if(moving) {
+        if (moving)
+        {
             this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-            if(this.transform.position == newPos) moving = false;
+            if (this.transform.position == newPos) moving = false;
+
+            GameManager.instance.hideRange();
         }
     }
 }

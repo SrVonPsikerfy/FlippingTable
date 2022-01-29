@@ -74,6 +74,9 @@ public class PlayerController : MonoBehaviour
 
                 f.setStats(1,1,1,1);
             }
+            else if(Input.GetKeyDown(KeyCode.L)){
+                GameManager.instance.debug();
+            }
         }
 
     }

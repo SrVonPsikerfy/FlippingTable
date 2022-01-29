@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        Debug.Log(uiM);
     }
 
     public void SetUIManager(UIManager ui){
@@ -150,10 +149,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void ShowRange(Vector2 cords, int range){
-        for(int i=0; i < direcciones.Length; i++){
-            Vector2 newCord = cords + (direcciones[i] * range);
+        Vector2 esqIzq = new Vector2(cords.y - range, cords.x - range);
+        Vector2 esqDer = new Vector2(cords.y + range + 1, cords.x + range + 1);
 
-            if(validCords(newCord)){
+        for(int i = (int)esqIzq.y; i < esqDer.y; i++){
+            for(int j = (int)esqIzq.x; j < esqDer.x; j++){
+                Vector2 newCord = new Vector2(i,j);
+
+                if(!validCords(newCord)) continue;
 
                 GameObject g = tablero[(int)newCord.y,(int) newCord.x].cell;
 
@@ -232,5 +235,11 @@ public class GameManager : MonoBehaviour
 
     public void SetFicha(int x, int y, GameObject obj){
         tablero[y,x].fichaObj = obj;
+    }
+
+    public void debug(){
+        for(int i=0; i < currentFichas.Count;i++){
+            Debug.Log(currentFichas[i].GetComponent<FichaInfo>().getCords());
+        }
     }
 }
