@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fichaMovement : MonoBehaviour
+public class FichaMovement : MonoBehaviour
 {
     bool selected = false;
 
@@ -45,7 +45,7 @@ public class fichaMovement : MonoBehaviour
             if(hit.transform == null)return;
 
             //para codigo limpito
-            casillaInfo infCas = hit.transform.gameObject.GetComponent<casillaInfo>();
+            CasillaInfo infCas = hit.transform.gameObject.GetComponent<CasillaInfo>();
             FichaInfo infGeneral=this.gameObject.GetComponent<FichaInfo>();
             FichaInfo infTransf = this.transform.gameObject.GetComponent<FichaInfo>();
             FichaInfo infHit = hit.transform.gameObject.GetComponent<FichaInfo>();

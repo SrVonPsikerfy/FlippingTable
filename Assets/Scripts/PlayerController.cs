@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
             Vector3 pos = casillaAux.transform.position;
 
             //Hay que hacer una variable con las alturas
-            GameManager.alturas alt = casillaAux.GetComponent<casillaInfo>().getAltura();
+            GameManager.alturas alt = casillaAux.GetComponent<CasillaInfo>().getAltura();
             switch(alt){
                 case GameManager.alturas.valle: pos.y = 0.5f; break;
                 case GameManager.alturas.llano: pos.y = 1f; break;

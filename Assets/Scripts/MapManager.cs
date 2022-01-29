@@ -117,7 +117,7 @@ public class MapManager : MonoBehaviour
                     }
                     else
                         f = GameManager.flagCell.None;
-                    casillaInfo cas = cases.GetComponent<casillaInfo>();
+                    CasillaInfo cas = cases.GetComponent<CasillaInfo>();
                     if(cas != null){
                         cas.setInfo(pos2D, a, f);
                     }
@@ -152,7 +152,7 @@ public class MapManager : MonoBehaviour
                 Quaternion currentRotation = child.transform.rotation;
                 child.transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * rSpeed);
                 //traslacion
-                casillaInfo cas = child.GetComponent<casillaInfo>();
+                CasillaInfo cas = child.GetComponent<CasillaInfo>();
                 if(!cas.isFlip()){
                     if(cas.getAltura() == GameManager.alturas.valle){
                         cas.setAltura(GameManager.alturas.colina);
@@ -175,7 +175,7 @@ public class MapManager : MonoBehaviour
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 GameObject child = GameManager.getCell(i,j);
-                casillaInfo cas = child.GetComponent<casillaInfo>();
+                CasillaInfo cas = child.GetComponent<CasillaInfo>();
                 cas.setFlip(false);
             }
         }

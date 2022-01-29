@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class casillaInfo : MonoBehaviour
+public class CasillaInfo : MonoBehaviour
 {
     Vector2 cords;
     GameManager.alturas a;
