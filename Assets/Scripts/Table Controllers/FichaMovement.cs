@@ -7,9 +7,9 @@ public class FichaMovement : MonoBehaviour
     bool selected = false, moving = false;
 
     float altDif = 0.5f;
-    float defaultPos = 1f;
-    float vallePos = 0.5f;
-    float colinaPos = 1.5f;
+    float defaultPos = 0.9f;
+    float vallePos = 0.4f;
+    float colinaPos = 1.4f;
 
     Vector3 newPos = new Vector3();
 
