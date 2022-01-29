@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     // private UIManager uiManager;
     int currentLevel = 0;
-
     public enum alturas {valle =  -1, llano = 0, colina = 1};
+    public enum playerName { player1, player2};
     public enum fichas {ranged, melee, tank, engineer, none};
     public static int tableroSize = 10;
     public struct Casilla{
@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
         public Vector2 position;
         public GameObject cell;
     }
+
+    private UIManager uiM;
     //Array para las direcciones
     public static Vector2[] direcciones = {
         new Vector2(1,-1),
@@ -30,24 +32,22 @@ public class GameManager : MonoBehaviour
         new Vector2(-1,0),
         new Vector2(-1,1),
     };
-
+    private playerName turn;
     static Casilla[,] tablero = new Casilla[tableroSize,tableroSize];
 
     List<GameObject> currentFichas = new List<GameObject>();
     int nFichas = 0;
-    private void Awake()
-    {
+    private void Awake(){
         //Cosa que viene en los apuntes para que el gamemanager no se destruya entre escenas
-        if (instance == null)
-        {
+        if (instance == null){
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        else
-        {
+        else{
             Destroy(this.gameObject);
         }
     }
+
 
     public void ChangeScene(string name)
     {
@@ -55,6 +55,15 @@ public class GameManager : MonoBehaviour
         if (name == "Main Menu") currentLevel = 0;
         SceneManager.LoadScene(name);
         Time.timeScale = 1f; //Restaurar la ejecucion en caso de que esté pausado el juego.
+    }
+
+    public void changePlayer(playerName type){
+        turn = type;
+        int id = (int)type;
+        id++;
+        Debug.Log(uiM);
+        if(uiM != null) uiM.changeId(id.ToString());
+        
     }
 
     public void LevelFinished(bool playerWins)
@@ -67,6 +76,10 @@ public class GameManager : MonoBehaviour
         return currentLevel;
     }
 
+
+    public void SetUIManager(UIManager ui){
+        uiM = ui;
+    }
     //We store all the information about the table
     public static void addCell(Vector2 pos, GameObject obj, alturas alt){
         Casilla c;
