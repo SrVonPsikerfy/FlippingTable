@@ -534,7 +534,7 @@ MonoBehaviour:
   size: 8
   prefabW: {fileID: 8389367108074226332, guid: c5469dab0200f4c30bbb7f61ac228bb4, type: 3}
   prefabB: {fileID: 4506375161648353687, guid: bfb7ddcbc586e4b2f84fcb0d0d418251, type: 3}
-  rSpeed: 5
+  rSpeed: 250
 --- !u!4 &1960324156
 Transform:
   m_ObjectHideFlags: 0

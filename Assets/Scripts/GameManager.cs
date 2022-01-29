@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     }
 
     //get theGameObject from a Cell
-    GameObject getCell(int i, int j){
+    public static GameObject getCell(int i, int j){
         return tablero[i,j].cell;
     }
 }

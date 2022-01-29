@@ -3,18 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using alturas = GameManager.alturas;
-public class Spawner : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
+    //Public
     [SerializeField]
     int size = GameManager.tableroSize; 
 
+    public GameManager gM; 
     public GameObject prefabW = null;
-
     public GameObject prefabB = null;
     [Header("RotateSpeed")]
     public float rSpeed = 5.0f;
-    // Start is called before the first frame update
+
+    //Privates
+    Quaternion wantedRotation = Quaternion.Euler(180,0,0);
+    bool flipDone = true;
+    bool topSide = true;
+
     void Start(){
+
+        if(gM == null){
+            Debug.Log("There is not GameManager");
+        }
+
+        generateMap();
+    }
+
+    // Update is called once per frame
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.F)){
+            Debug.Log("uwu");
+            flipDone = false;
+            topSide = !topSide;
+            wantedRotation = (topSide)? Quaternion.Euler(0,0,0): Quaternion.Euler(180,0,0);
+        }
+        if(GameManager.getCell(size-1,size-1).transform.rotation.x == wantedRotation.x)
+            flipDone = true;
+            
+        if(!flipDone) flipMap();
+    }
+
+    void generateMap(){
+
         float init = -size/2;
 
         float auxX = init, auxZ = init;
@@ -51,18 +81,13 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update(){
-            if (Input.GetKeyDown(KeyCode.F)){
-                Debug.Log("uwu");
-                rotateMap();
+    void flipMap(){
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                GameObject child = GameManager.getCell(i,j);
+                Quaternion currentRotation = child.transform.rotation;
+                child.transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * rSpeed);
             }
-        
-    }
-
-    void rotateMap(){
-        Quaternion currentRotation = transform.rotation;
-        Quaternion wantedRotation = Quaternion.Euler(180,0,0);
-        transform.rotation = Quaternion.RotateTowards(currentRotation, wantedRotation, Time.deltaTime * rSpeed);
+        }        
     }
 }
