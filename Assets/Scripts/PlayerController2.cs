@@ -4,7 +4,7 @@ using UnityEngine;
 
 enum Heights { Valley, Plane, Mountain }
 
-public class playerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public GameObject melee, ranged, tank, engi;
 
