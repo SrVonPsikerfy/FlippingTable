@@ -28,11 +28,10 @@ public class MapManager : MonoBehaviour
     float countdown;
     int k = 0;  //diagonal inicial
     Vector3 yVel = Vector3.zero;
-
-    bool player1Flag, player2Flag;
+    GameObject player1Flag = null;
+    GameObject player2Flag = null;
 
     void Start(){
-        player1Flag = player2Flag = false;
         countdown = delay;
         generateMap();
     }
@@ -100,9 +99,8 @@ public class MapManager : MonoBehaviour
                             case GameManager.alturas.llano: pos.y = 1f; break;
                             case GameManager.alturas.colina: pos.y = 1.5f; break;
                         }
-                        GameObject fl = Instantiate(prefabFlag, pos, Quaternion.identity);
+                        player1Flag = Instantiate(prefabFlag, pos, Quaternion.identity);
                         f = GameManager.flagCell.player1;
-                        player1Flag = true;
                     }
                     else if(i == size-1 && j == size - 1){
                         Vector3 pos = cases.transform.position;
@@ -111,9 +109,8 @@ public class MapManager : MonoBehaviour
                             case GameManager.alturas.llano: pos.y = 1f; break;
                             case GameManager.alturas.colina: pos.y = 1.5f; break;
                         }
-                        GameObject fl = Instantiate(prefabFlag, pos, Quaternion.identity);
+                        player2Flag = Instantiate(prefabFlag, pos, Quaternion.identity);
                         f = GameManager.flagCell.player2;
-                        player2Flag = true;
                     }
                     else
                         f = GameManager.flagCell.None;
@@ -166,7 +163,18 @@ public class MapManager : MonoBehaviour
                     Vector3 currentPosition = child.transform.position;
                     Vector3 wantedPosition = new Vector3(currentPosition.x , movementY * (int)cas.getAltura(), currentPosition.z); 
                     child.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
-                    }
+                }
+                //Traslacion flags
+                if(cas.getFlag() == GameManager.flagCell.player1){
+                    Vector3 currentPosition = player1Flag.transform.position;
+                    Vector3 wantedPosition = new Vector3(currentPosition.x , 1.0f + 0.5f * (int)cas.getAltura(), currentPosition.z); 
+                    player1Flag.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
+                }
+                else if(cas.getFlag() == GameManager.flagCell.player2){
+                    Vector3 currentPosition = player2Flag.transform.position;
+                    Vector3 wantedPosition = new Vector3(currentPosition.x , 1.0f + 0.5f * (int)cas.getAltura(), currentPosition.z); 
+                    player2Flag.transform.position = Vector3.Lerp(currentPosition, wantedPosition, Time.deltaTime * ySpeed);
+                }
             }
         }
     }

@@ -66,6 +66,10 @@ public class GameManager : MonoBehaviour
         turn = playerName.player2;
     }
 
+    public List<GameObject> getTabFichas(){
+        return currentFichas;
+    }
+
     public bool getTurn(){
         return turn != playerName.player1;
     }
