@@ -24,7 +24,10 @@ public class UIManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.C)) {
+            GameManager.instance.changePlayer();
+            Camera.main.GetComponent<RotationCamera>().flip();
+        }
     }
 
     public void changeId(string id){
