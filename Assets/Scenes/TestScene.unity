@@ -498,7 +498,7 @@ MonoBehaviour:
     type: 3}
   delay: 0.1
   rSpeed: 800
-  ySpeed: 0.1
+  ySpeed: 15
 --- !u!4 &1960324156
 Transform:
   m_ObjectHideFlags: 0
