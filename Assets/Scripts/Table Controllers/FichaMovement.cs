@@ -24,8 +24,9 @@ public class FichaMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if (Input.GetKeyDown(KeyCode.M)){
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
             FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
 
             if (f != null)
@@ -43,9 +44,14 @@ public class FichaMovement : MonoBehaviour
 
             FichaInfo infHit = hit.transform.gameObject.GetComponent<FichaInfo>();
 
-            if(infCas != null && selected && !moving){
-                
-                Vector2 dist = infCas.getCords() - infTransf.getCords();
+            if (hit.transform.gameObject == this.gameObject && !selected)
+            {
+
+                //Vector2 dist = info.getCords() - infHit.getCords();
+
+                selected = true;
+                GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
+                this.gameObject.GetComponent<FichaInfo>().getRange());
 
                 //asies tengo retraso mental severo by Laura
 
@@ -97,13 +103,13 @@ public class FichaMovement : MonoBehaviour
                 {
                     newPos = hit.transform.position;
 
-                    if(infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-                    else if(infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
+                    if (infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
+                    else if (infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
                     else newPos.y = defaultPos;
-            
+
                     this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-                    GameManager.instance.SetFicha((int)infCas.getCords().x,(int) infCas.getCords().y, hit.transform.gameObject);
-                    infTransf.setCords(infCas.getCords());
+                    GameManager.instance.SetFicha((int)infCas.getCords().x, (int)infCas.getCords().y, hit.transform.gameObject);
+                    info.setCords(infCas.getCords());
 
                     selected = false; moving = true;
                 }
@@ -111,20 +117,25 @@ public class FichaMovement : MonoBehaviour
             else
             {
                 selected = false;
-                
+
             }
 
-                if(selected){
-                    GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
-                     this.gameObject.GetComponent<FichaInfo>().getRange());
-                }
-            }  
+            if (selected)
+            {
+                GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
+                 this.gameObject.GetComponent<FichaInfo>().getRange());
+            }
         }
 
-        if(moving) {
+        if (moving)
+        {
             this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-            if(this.transform.position == newPos) moving = false;
-        }
+            if (this.transform.position == newPos) moving = false;
 
+            GameManager.instance.hideRange();
+        }
     }
+
 }
+
+
