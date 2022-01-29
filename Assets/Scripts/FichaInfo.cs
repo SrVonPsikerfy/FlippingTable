@@ -27,4 +27,8 @@ public class FichaInfo : MonoBehaviour
     public Vector2 getCords(){
         return cords;
     }
+
+    public void setCords(Vector2 newC){
+        cords = newC;
+    }
 }
