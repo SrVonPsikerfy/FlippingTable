@@ -58,7 +58,7 @@ public class FichaMovement : MonoBehaviour
                     else newPos.y = defaultPos;
             
                     this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-
+                    GameManager.instance.SetFicha((int)infCas.getCords().x,(int) infCas.getCords().y, hit.transform.gameObject);
                     infTransf.setCords(infCas.getCords());
 
                     selected = false; moving = true;

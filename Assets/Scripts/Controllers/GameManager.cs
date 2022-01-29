@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         public bool ocupada;
         public Vector2 position;
         public GameObject cell;
+        public GameObject fichaObj;
     }
 
     private UIManager uiM;
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
         c.altura = alt;
         c.ocupada = false;
         c.ficha = fichas.none;    
+        c.fichaObj = null;
 
         tablero[(int)pos.y,(int)pos.x] = c;
     }
@@ -226,5 +228,9 @@ public class GameManager : MonoBehaviour
         cord.x < tableroSize && cord.y < tableroSize;
 
         return valid;
+    }
+
+    public void SetFicha(int x, int y, GameObject obj){
+        tablero[y,x].fichaObj = obj;
     }
 }
