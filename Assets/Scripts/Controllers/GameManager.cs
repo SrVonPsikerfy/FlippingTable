@@ -263,4 +263,29 @@ public class GameManager : MonoBehaviour
 
     public static void setTableroSide() { sideUp = !sideUp;}
     public static bool getTableroSide() { return sideUp;}
+
+    public static void pickFlag(GameObject obj, GameObject cell){
+        if(cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.None){
+            if(cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.player1){
+                obj.AddComponent<Flag>().setType(GameManager.flagCell.player2);
+                cell.transform.parent.GetComponent<MapManager>().deleteFlag(GameManager.flagCell.player2);
+            }
+            else{
+                obj.AddComponent<Flag>().setType(GameManager.flagCell.player1);
+                cell.transform.parent.GetComponent<MapManager>().deleteFlag(GameManager.flagCell.player1);
+            }
+                
+            cell.GetComponent<CasillaInfo>().setFlag(GameManager.flagCell.None);
+        }
+    }
+
+    public static void dropFlag(GameObject obj, GameObject cell){
+        if(obj.GetComponent<Flag>() != null){
+            GameManager.flagCell flag = obj.GetComponent<Flag>().getType();
+            Destroy(obj.GetComponent<Flag>());
+            cell.transform.parent.GetComponent<MapManager>().createFlag(cell.transform.position, cell.GetComponent<CasillaInfo>().getAltura(), flag);
+            cell.GetComponent<CasillaInfo>().setFlag(flag);
+        }
+    }
+    
 }

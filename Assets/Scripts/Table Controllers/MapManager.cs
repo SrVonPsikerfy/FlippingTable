@@ -95,23 +95,11 @@ public class MapManager : MonoBehaviour
                     GameManager.addCell(pos2D, cases, a);
                     //Si es esquina crea flag correspondiente
                     if(i == 0 && j == 0){
-                        Vector3 pos = cases.transform.position;
-                        switch(a){
-                            case GameManager.alturas.valle: pos.y = 0.5f; break;
-                            case GameManager.alturas.llano: pos.y = 1f; break;
-                            case GameManager.alturas.colina: pos.y = 1.5f; break;
-                        }
-                        player1Flag = Instantiate(prefabFlag, pos, Quaternion.identity);
+                        createFlag(cases.transform.position,a , GameManager.flagCell.player1);
                         f = GameManager.flagCell.player1;
                     }
                     else if(i == size-1 && j == size - 1){
-                        Vector3 pos = cases.transform.position;
-                        switch(a){
-                            case GameManager.alturas.valle: pos.y = 0.5f; break;
-                            case GameManager.alturas.llano: pos.y = 1f; break;
-                            case GameManager.alturas.colina: pos.y = 1.5f; break;
-                        }
-                        player2Flag = Instantiate(prefabFlag, pos, Quaternion.identity);
+                        createFlag(cases.transform.position, a, GameManager.flagCell.player2);
                         f = GameManager.flagCell.player2;
                     }
                     else
@@ -190,5 +178,29 @@ public class MapManager : MonoBehaviour
                 cas.setFlip(false);
             }
         }
+    }
+
+    public void createFlag(Vector3 pos, GameManager.alturas a,GameManager.flagCell flag){
+        switch(a){
+            case GameManager.alturas.valle: pos.y = 0.5f; break;
+            case GameManager.alturas.llano: pos.y = 1f; break;
+            case GameManager.alturas.colina: pos.y = 1.5f; break;
+        }
+        if(flag == GameManager.flagCell.player1){
+            player1Flag = Instantiate(prefabFlag, pos, Quaternion.identity);
+            player1Flag.AddComponent<Flag>().setType(GameManager.flagCell.player1);
+        }
+        else{
+            player2Flag = Instantiate(prefabFlag, pos, Quaternion.identity);
+            player2Flag.AddComponent<Flag>().setType(GameManager.flagCell.player2);
+        }
+    }
+
+    public void deleteFlag(GameManager.flagCell flag){
+        if(flag == GameManager.flagCell.player1)
+            Destroy(player1Flag);
+
+        if(flag == GameManager.flagCell.player2)
+            Destroy(player2Flag);
     }
 }

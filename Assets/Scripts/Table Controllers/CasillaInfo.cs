@@ -44,8 +44,9 @@ public class CasillaInfo : MonoBehaviour
     public GameManager.flagCell getFlag(){
         return flag;
     }
-    public void setFlip(GameManager.flagCell f){
+    public void setFlag(GameManager.flagCell f){
         flag = f;
     }
+
 
 }

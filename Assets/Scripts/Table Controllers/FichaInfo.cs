@@ -54,6 +54,9 @@ public class FichaInfo : MonoBehaviour
 
     public void die(){
         dead = true;
+        GameObject cell = GameManager.getCell((int)this.GetComponent<FichaInfo>().getCords().y, (int)this.GetComponent<FichaInfo>().getCords().x);
+        GameManager.dropFlag(this.gameObject, cell);
+        Destroy(this.gameObject);
         GameManager.instance.removeDead();
     }
 

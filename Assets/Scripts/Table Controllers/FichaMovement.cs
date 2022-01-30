@@ -141,16 +141,18 @@ public class FichaMovement : MonoBehaviour
 
             GameManager.instance.hideRange();
         }
+        //Obtencion de la bandera
+        GameObject cell = GameManager.getCell((int)this.gameObject.GetComponent<FichaInfo>().getCords().y, (int)this.gameObject.GetComponent<FichaInfo>().getCords().x);
+        if(this.gameObject.GetComponent<Flag>() == null && cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.None){
+            GameManager.pickFlag(this.gameObject, cell);
+            Debug.Log(cell.GetComponent<CasillaInfo>().getFlag());
+        }
     }
     void LateUpdate()
     {
         GameObject cell = GameManager.getCell((int)this.gameObject.GetComponent<FichaInfo>().getCords().y, (int)this.gameObject.GetComponent<FichaInfo>().getCords().x);
         newPos = new Vector3(newPos.x, 0.9f + 0.5f * (int)cell.GetComponent<CasillaInfo>().getAltura(),newPos.z);
-        this.transform.position = Vector3.Lerp(this.transform.position, newPos, Time.deltaTime * 250);
-    }
-
-    public void setNewPos(Vector3 pos){
-        newPos = pos;
+        this.transform.position = Vector3.Lerp(this.transform.position, newPos, Time.deltaTime * 50);
     }
 
 }
