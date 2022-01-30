@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public enum alturas {valle =  -1, llano = 0, colina = 1};
 
     public enum flagCell { None, player1, player2}
-    public enum playerName { player1, player2};
+    public bool turnPlayer1;
     public enum fichas {ranged, melee, tank, engineer, none};
     public static int tableroSize = 8;
     public struct Casilla{
@@ -50,12 +50,13 @@ public class GameManager : MonoBehaviour
         new Vector2(-1,0),
         new Vector2(-1,1),
     };
-    private playerName turn;
     static Casilla[,] tablero = new Casilla[tableroSize,tableroSize];
 
     List<GameObject> currentFichas = new List<GameObject>();
+    List<GameObject> currentFichasPlayer2 = new List<GameObject>();
     List<KeyValuePair<MeshRenderer,alturas>>changedCasillas = new List<KeyValuePair<MeshRenderer,alturas>>();
     int nFichas = 0;
+    int nFichasPlayer2 = 0;
 
     int nChanged = 0;
     private void Awake()
@@ -68,8 +69,6 @@ public class GameManager : MonoBehaviour
         else{
             Destroy(this.gameObject);
         }
-
-        turn = playerName.player2;
     }
 
     public List<GameObject> getTabFichas(){
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
     }
 
     public bool getTurn(){
-        return turn != playerName.player1;
+        return turnPlayer1;
     }
     public void ChangeScene(string name)
     {
@@ -88,10 +87,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void changePlayer(){
-        turn = (playerName)(((int)turn+1) % 2);
-        int id = (int)turn;
-        id++;
+        uiM.flip();
+
+        turnPlayer1 = !turnPlayer1;
+        int id = 1;
+        if(!turnPlayer1)id = 2;
+
         if(uiM != null) uiM.changeId(id.ToString());
+
+        
     }
 
     public void deadFicha(GameObject ficha){
@@ -145,6 +149,12 @@ public class GameManager : MonoBehaviour
         currentFichas.Add(obj);
         SetFicha((int)coord.x,(int)coord.y,obj);
         nFichas++;
+    }
+
+    public void addFichaPlayer2(Vector2 coord, GameObject obj){
+        currentFichasPlayer2.Add(obj);
+        SetFicha((int)coord.x,(int)coord.y,obj);
+        nFichasPlayer2++;
     }
 
     public GameObject getFichas(int indice){

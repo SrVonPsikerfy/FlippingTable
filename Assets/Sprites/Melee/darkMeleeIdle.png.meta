@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 5d06c4829b3ab4d86857594e4e8025f4
 TextureImporter:
-<<<<<<< Updated upstream
-  internalIDToNameTable: []
-=======
+<<<<<<< HEAD
   internalIDToNameTable:
   - first:
       213: 7726512964218186031
@@ -11,16 +9,18 @@ TextureImporter:
   - first:
       213: 7069006677970219529
     second: darkMeleeIdle_1
->>>>>>> Stashed changes
+=======
+  internalIDToNameTable: []
+>>>>>>> master
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-<<<<<<< Updated upstream
-    enableMipMap: 1
-=======
+<<<<<<< HEAD
     enableMipMap: 0
->>>>>>> Stashed changes
+=======
+    enableMipMap: 1
+>>>>>>> master
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -45,18 +45,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< Updated upstream
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
-    wrapU: -1
-    wrapV: -1
-    wrapW: -1
-  nPOTScale: 1
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 0
-=======
+<<<<<<< HEAD
     filterMode: 0
     aniso: -1
     mipBias: -100
@@ -67,7 +56,18 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
->>>>>>> Stashed changes
+=======
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: -1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 1
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+>>>>>>> master
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,15 +76,15 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-<<<<<<< Updated upstream
-  alphaIsTransparency: 0
-  spriteTessellationDetail: -1
-  textureType: 0
-=======
+<<<<<<< HEAD
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
->>>>>>> Stashed changes
+=======
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 0
+>>>>>>> master
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -96,9 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< Updated upstream
-    textureCompression: 1
-=======
+<<<<<<< HEAD
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -112,7 +110,9 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
->>>>>>> Stashed changes
+=======
+    textureCompression: 1
+>>>>>>> master
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,22 +121,16 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< Updated upstream
-    sprites: []
-    outline: []
-    physicsShape: []
-    bones: []
-    spriteID: 
-=======
+<<<<<<< HEAD
     sprites:
     - serializedVersion: 2
       name: darkMeleeIdle_0
       rect:
         serializedVersion: 2
-        x: 31
+        x: 0
         y: 0
-        width: 121
-        height: 90
+        width: 186
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,7 +138,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7059dd75adba74f9d8c1f1fc1e1f7414
+      spriteID: c9f4abf69f59c427b9c4c15bcba5194d
       internalID: 7726512964218186031
       vertices: []
       indices: 
@@ -154,10 +148,10 @@ TextureImporter:
       name: darkMeleeIdle_1
       rect:
         serializedVersion: 2
-        x: 217
+        x: 186
         y: 0
-        width: 121
-        height: 90
+        width: 186
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,7 +159,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b14b875e9c1e84482abfe45d9d1b4b42
+      spriteID: 05ab2ac98a27140ebb11fa27206430b8
       internalID: 7069006677970219529
       vertices: []
       indices: 
@@ -174,8 +168,14 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
->>>>>>> Stashed changes
+    spriteID: cbe23a50dbc914561bd6489911fa140c
+=======
+    sprites: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+>>>>>>> master
     internalID: 0
     vertices: []
     indices: 

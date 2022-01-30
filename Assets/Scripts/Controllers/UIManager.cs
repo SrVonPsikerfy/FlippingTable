@@ -12,7 +12,8 @@ public class UIManager : MonoBehaviour {
 	
     void Start(){
         GameManager.instance.SetUIManager(this);
-        GameManager.instance.changePlayer();
+
+        idText.text = 1.ToString();
     }
 
     void Awake()
@@ -28,7 +29,7 @@ public class UIManager : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.C)) {
             GameManager.instance.changePlayer();
-            Camera.main.GetComponent<RotationCamera>().flip();
+
         }
     }
 
@@ -36,6 +37,12 @@ public class UIManager : MonoBehaviour {
         idText.text = id;
     }
 
+    public void flip(){
+        Camera.main.GetComponent<RotationCamera>().flip();
+
+                
+        Debug.Log("Saquenme de latinoAmerica");
+    }
     public void displayActions(GameObject token){
         Terraformer isEngineer = token.GetComponent<Terraformer>();
 
