@@ -89,8 +89,12 @@ public class FichaMovement : MonoBehaviour
         //Obtencion de la bandera
         GameObject cell = GameManager.getCell((int)this.gameObject.GetComponent<FichaInfo>().getCords().y, (int)this.gameObject.GetComponent<FichaInfo>().getCords().x);
         if(this.gameObject.GetComponent<Flag>() == null && cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.None){
-            GameManager.pickFlag(this.gameObject, cell);
-            Debug.Log(cell.GetComponent<CasillaInfo>().getFlag());
+            if(cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.player2 && this.gameObject.GetComponent<FichaInfo>().getSide()){
+                GameManager.pickFlag(this.gameObject, cell);
+            }
+            else if(cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.player1 && !this.gameObject.GetComponent<FichaInfo>().getSide()){
+                GameManager.pickFlag(this.gameObject, cell);
+            }
         }
     }
     void LateUpdate()

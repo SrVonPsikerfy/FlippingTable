@@ -123,6 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7caf8fedb764dc0a4ca619b1435351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentFlag: {fileID: 0}
+  spriteArray:
+  - {fileID: 21300000, guid: d5a2d776f1d3744fe817190202a5e35c, type: 3}
+  - {fileID: 21300000, guid: 029cb4195ec4f4e508f1032244d8f202, type: 3}
+  - {fileID: 21300000, guid: 94aef66fd39a04d598a37eee93406c2d, type: 3}
+  - {fileID: 21300000, guid: 5965e964f1a294484b149547c80ba4df, type: 3}
 --- !u!114 &690138952470874437
 MonoBehaviour:
   m_ObjectHideFlags: 0

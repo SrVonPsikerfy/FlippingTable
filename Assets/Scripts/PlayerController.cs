@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
                 if(GameManager.instance.getTurn())GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(1, 1, 1, 2);
+                f.setStats(1, 1, 1, 2, GameManager.instance.getTurn());
 
                 GameManager.instance.changePlayer();
             }
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
                 if (GameManager.instance.getTurn()) GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(2, 1, 2, 1);
+                f.setStats(2, 1, 2, 1, GameManager.instance.getTurn());
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
                 if (GameManager.instance.getTurn()) GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(1, 1, 1, 3);
+                f.setStats(1, 1, 1, 3, GameManager.instance.getTurn());
             }
             else if (Input.GetKeyDown(KeyCode.R))
             {
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
                 if (GameManager.instance.getTurn()) GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(1, 1, 1, 1);
+                f.setStats(1, 1, 1, 1, GameManager.instance.getTurn());
 
 
             }
