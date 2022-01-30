@@ -11,15 +11,33 @@ public class Melee  : TokenBehaviour
 
     void Start(){
         gM = GameManager.instance;
-        f= this.gameObject.GetComponent<FichaInfo>();
+        f = this.gameObject.GetComponent<FichaInfo>();
         f.setStats(1,1,1,2);
     }
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            receiveDamage();
+        
+        if(f.getDamage() > 0){
+
+        if(attacks && Input.GetMouseButtonDown(0)){
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+            FichaInfo other = hit.transform.gameObject.GetComponent<FichaInfo>();
+
+            Debug.Log(f.getRange());
+            Vector2 thisCoords = f.getCords();
+            Vector2 otherCoords = other.getCords();
+
+            if ( Mathf.Abs (thisCoords.x-otherCoords.x) <= f.getRange() ||
+            Mathf.Abs (thisCoords.y-otherCoords.y)<=f.getRange()){
+                other.receiveDamage();
+                Debug.Log("boink");
+            }
+            
         }
+        }
+        else f.die();
     }
     public override void Move(){
         gonMove = !gonMove;
@@ -35,9 +53,7 @@ public class Melee  : TokenBehaviour
         else Debug.Log("Heal attack");
     }
     
-    public void receiveDamage(){
+    public void getHit(){
         f.receiveDamage();
-        if(f.getDamage() > 0) Debug.Log(f.getDamage());
-        else f.die();
     }
 }
