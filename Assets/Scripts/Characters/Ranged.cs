@@ -12,12 +12,11 @@ public class Ranged : TokenBehaviour
     void Start(){
         gM = GameManager.instance;
         f = this.gameObject.GetComponent<FichaInfo>();
-        f.setStats(2, 1, 2, 4);
     }
 
     // Update is called once per frame
     void Update() {
-            FichaMovement mov=this.gameObject.GetComponent<FichaMovement>();
+            FichaMovement mov = this.gameObject.GetComponent<FichaMovement>();
             Debug.Log(mov.selected);
         if(attacks && timer <= 0 && Input.GetMouseButtonDown(1)&&mov.selected){
             timer = 5.0f;

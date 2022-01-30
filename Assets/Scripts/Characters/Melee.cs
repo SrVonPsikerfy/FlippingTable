@@ -12,7 +12,6 @@ public class Melee  : TokenBehaviour
     void Start(){
         gM = GameManager.instance;
         f = this.gameObject.GetComponent<FichaInfo>();
-        f.setStats(1,1,1,2);
     }
     // Update is called once per frame
     void Update() {
