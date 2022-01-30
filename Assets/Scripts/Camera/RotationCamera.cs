@@ -42,8 +42,7 @@ public class RotationCamera : MonoBehaviour
         transform.position = mainPosition;
         transform.rotation = mainRotation;
 
-        if(gM.getTurn())
-            alt = -1;
+        if(gM.getTurn() == 1) alt = -1;
         else alt = 1;
         
         Quaternion camAngleY = Quaternion.AngleAxis(rotateAngle.y * alt * rotateSpeed, Vector3.up);

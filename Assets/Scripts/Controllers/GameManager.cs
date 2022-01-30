@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 
 public class GameManager : MonoBehaviour
@@ -22,11 +23,11 @@ public class GameManager : MonoBehaviour
     public Material[] llanoInitMaterial = new Material[2];
     public Material[] colinaInitMaterial = new Material[2];
 
-    public enum alturas {valle =  -1, llano = 0, colina = 1};
+    public enum alturas { valle =  -1, llano = 0, colina = 1};
+    public enum flagCell { None, player1, player2 };
+    public enum fichas { ranged, melee, tank, engineer, none };
 
-    public enum flagCell { None, player1, player2}
-    public bool turnPlayer1;
-    public enum fichas {ranged, melee, tank, engineer, none};
+    public int turnPlayer = 1;
     public static int tableroSize = 8;
     public struct Casilla{
         public alturas altura;
@@ -75,8 +76,8 @@ public class GameManager : MonoBehaviour
         return currentFichas;
     }
 
-    public bool getTurn(){
-        return turnPlayer1;
+    public int getTurn(){
+        return turnPlayer;
     }
     public void ChangeScene(string name)
     {
@@ -87,15 +88,20 @@ public class GameManager : MonoBehaviour
     }
 
     public void changePlayer(){
-        uiM.flip();
+        int newTurn = (turnPlayer == 1 ? 2 : 1);
 
-        turnPlayer1 = !turnPlayer1;
-        int id = 1;
-        if(!turnPlayer1)id = 2;
-
-        if(uiM != null) uiM.changeId(id.ToString());
-
+        if(uiM != null) {
+            uiM.changeId(newTurn.ToString());
+            uiM.flip();
+        } 
         
+        StartCoroutine(delayTurn(0.5f, newTurn));
+    }
+
+    IEnumerator delayTurn(float time, int newTurn)
+    {
+        yield return new WaitForSeconds(time);
+        turnPlayer = newTurn;
     }
 
     public void deadFicha(GameObject ficha){
