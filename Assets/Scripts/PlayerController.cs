@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
                 if (GameManager.instance.getTurn()) GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(2, 1, 2, 1);
+                f.setStats(2, 1, 2, 4);
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
