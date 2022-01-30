@@ -4,6 +4,8 @@ TextureImporter:
 <<<<<<< Updated upstream
   internalIDToNameTable: []
 =======
+guid: 4e14bc02f21784dc4bb2127ac81807e8
+TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5821376472308743955
@@ -16,11 +18,7 @@ TextureImporter:
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-<<<<<<< Updated upstream
     enableMipMap: 1
-=======
-    enableMipMap: 0
->>>>>>> Stashed changes
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -45,7 +43,6 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< Updated upstream
     filterMode: -1
     aniso: -1
     mipBias: -100
@@ -58,7 +55,7 @@ TextureImporter:
   spriteMode: 0
 =======
     filterMode: 0
-    aniso: -1
+    aniso: 2
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -76,15 +73,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-<<<<<<< Updated upstream
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 0
-=======
-  alphaIsTransparency: 1
-  spriteTessellationDetail: -1
-  textureType: 8
->>>>>>> Stashed changes
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -96,21 +87,8 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< Updated upstream
     textureCompression: 1
 =======
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
     textureCompression: 0
 >>>>>>> Stashed changes
     compressionQuality: 50
@@ -119,9 +97,48 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+<<<<<<< Updated upstream
+    textureCompression: 1
+=======
+    textureCompression: 0
+>>>>>>> Stashed changes
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< Updated upstream
     sprites: []
     outline: []
     physicsShape: []
@@ -144,7 +161,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 897252da7aef147f1aee1f3b62014224
+      spriteID: d262dae0ca7de4a93a8b7cd4bcf7fc34
       internalID: -5821376472308743955
       vertices: []
       indices: 
@@ -165,7 +182,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40869d82a36c346368f652330d1b503a
+      spriteID: 62627e31559ee4a8fa7a93e6eeb33283
       internalID: -5007345272705287434
       vertices: []
       indices: 
@@ -174,7 +191,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0c00764dd5bb14db599374601766c58b
+    spriteID: 4b0dd118aff88418998ec8abb82db66d
 >>>>>>> Stashed changes
     internalID: 0
     vertices: []

@@ -62,9 +62,8 @@ public class FichaMovement : MonoBehaviour
                 if (info.getMovement() >= Mathf.Abs(dist.x) && info.getMovement() >= Mathf.Abs(dist.y)) {
                     newPos = hit.transform.position;
                     
-                    Debug.Log(cell_info.getAltura());
-                    if (cell_info.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-                    else if (cell_info.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
+                    if (infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
+                    else if (infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
                     else newPos.y = defaultPos;
 
                     GameManager.instance.SetFicha((int)cell_info.getCords().x, (int)cell_info.getCords().y, hit.transform.gameObject);
