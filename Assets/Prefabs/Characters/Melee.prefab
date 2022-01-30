@@ -14,12 +14,9 @@ GameObject:
   - component: {fileID: 3621665688393227209}
   - component: {fileID: 3621665688393227223}
   - component: {fileID: 3621665688393227222}
-<<<<<<< Updated upstream
-  - component: {fileID: -8788874844126026980}
-=======
+  - component: {fileID: 7478234537052523408}
   - component: {fileID: 4917891811993590437}
   - component: {fileID: 7633099085834688267}
->>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Melee
   m_TagString: Untagged
@@ -140,26 +137,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70855044b6abe41f187baeb6fd5b6de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
---- !u!114 &-8788874844126026980
+--- !u!114 &7478234537052523408
 MonoBehaviour:
-=======
---- !u!95 &4917891811993590437
-Animator:
-  serializedVersion: 3
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3621665688393227210}
   m_Enabled: 1
-<<<<<<< Updated upstream
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05b1c1e82124747a98192fa76c40575c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-=======
+--- !u!95 &4917891811993590437
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3621665688393227210}
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a8605ce94f7a74fe597048ac4bc540b9, type: 2}
   m_CullingMode: 0
@@ -185,4 +183,3 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
->>>>>>> Stashed changes
