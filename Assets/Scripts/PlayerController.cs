@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject melee, ranged, tank, engi;
 
+    //Variable de prefab 
+    GameManager.fichas ficha = GameManager.fichas.none;
     public bool p1;
 
     // Update is called once per frame
@@ -15,86 +17,76 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.anyKeyDown && myTurn())
         {   
-            GameObject casillaAux = GameManager.getCell(0, 1);
-            this.gameObject.transform.position = new Vector3(casillaAux.transform.position.x,
-            this.transform.position.y, casillaAux.transform.position.z);
-
-            Vector3 pos = casillaAux.transform.position;
-
-            //Hay que hacer una variable con las alturas
-            GameManager.alturas alt = casillaAux.GetComponent<CasillaInfo>().getAltura();
-            switch (alt)
-            {
-                case GameManager.alturas.valle: pos.y = 0.4f; break;
-                case GameManager.alturas.llano: pos.y = 0.9f; break;
-                case GameManager.alturas.colina: pos.y = 1.4f; break;
-            }
-
-            Debug.Log("Es el player 1:" + p1);
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                GameObject g = Instantiate(melee, pos, Quaternion.identity);
-                FichaInfo f = g.GetComponent<FichaInfo>();
-
-                if (f != null) f.setInfo(new Vector2(0, 1), GameManager.fichas.melee);
-
-                if(GameManager.instance.getTurn() == 1)GameManager.instance.addFicha(new Vector2(0, 1), g);
-                else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
-
-                f.setStats(1, 1, 1, 2, p1);
-
+            if(Input.GetKeyDown(KeyCode.Space)){
+                GameManager.instance.tokenUnselected();
                 GameManager.instance.changePlayer();
             }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                GameObject g = Instantiate(ranged, pos, Quaternion.identity);
+            else if(GameManager.instance.getTurnAction() == GameManager.turnActions.none && GameManager.instance.getlockedToken() == null){  //Solo coloca si no ha hecho nada
+                if (Input.GetMouseButtonDown(0)){
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    Physics.Raycast(ray, out hit);
+                    if (hit.transform == null) return;
 
-                FichaInfo f = g.GetComponent<FichaInfo>();
-
-                if (f != null)
-                    f.setInfo(new Vector2(0, 1), GameManager.fichas.ranged);
-
-                if (GameManager.instance.getTurn() == 1) GameManager.instance.addFicha(new Vector2(0, 1), g);
-                else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
-
-                f.setStats(2, 1, 2, 1, p1);
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                GameObject g = Instantiate(tank, pos, Quaternion.identity);
-
-                FichaInfo f = g.GetComponent<FichaInfo>();
-
-                if (f != null)
-                    f.setInfo(new Vector2(0, 1), GameManager.fichas.tank);
-
-                if (GameManager.instance.getTurn() == 1) GameManager.instance.addFicha(new Vector2(0, 1), g);
-                else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
-
-                f.setStats(1, 1, 1, 3, p1);
-            }
-            else if (Input.GetKeyDown(KeyCode.R))
-            {
-                GameObject g = Instantiate(engi, pos, Quaternion.identity);
-
-                FichaInfo f = g.GetComponent<FichaInfo>();
-
-                if (f != null)
-                    f.setInfo(new Vector2(0, 1), GameManager.fichas.engineer);
-
-                if (GameManager.instance.getTurn() == 1) GameManager.instance.addFicha(new Vector2(0, 1), g);
-                else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
-
-                f.setStats(1, 1, 1, 1, p1);
-            }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                GameManager.instance.debug();
+                    CasillaInfo cell_info = hit.transform.gameObject.GetComponent<CasillaInfo>();
+                
+                    if(cell_info != null && ficha != GameManager.fichas.none){
+                        createToken(ficha, hit.transform.position, cell_info.getCords());
+                        ficha = GameManager.fichas.none;
+                    }
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha1)){
+                    ficha = GameManager.fichas.melee;
+                    Debug.Log(ficha);
+                    }
+                else if (Input.GetKeyDown(KeyCode.Alpha2)){
+                    ficha = GameManager.fichas.ranged;
+                    Debug.Log(ficha);
+                    }
+                else if (Input.GetKeyDown(KeyCode.Alpha3)){
+                    ficha = GameManager.fichas.tank;
+                    Debug.Log(ficha);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha4)){
+                    ficha = GameManager.fichas.engineer;
+                    Debug.Log(ficha);
+                }
             }
         }
 
     }
 
+    void createToken(GameManager.fichas prefab, Vector3 pos, Vector2 cell_pos){
+        
+        GameObject g = null;
+        switch(prefab){
+            case GameManager.fichas.melee:
+                g = Instantiate(melee, pos, Quaternion.identity);
+                break;
+            case GameManager.fichas.ranged:
+                g = Instantiate(ranged, pos, Quaternion.identity);
+                break;
+            case GameManager.fichas.tank:
+                g = Instantiate(tank, pos, Quaternion.identity);
+                break;
+            case GameManager.fichas.engineer:
+                g = Instantiate(engi, pos, Quaternion.identity);
+                break;
+
+        }
+
+        FichaInfo f = g.GetComponent<FichaInfo>();
+
+        if (f != null)
+            f.setInfo(cell_pos, GameManager.fichas.engineer);
+
+        if (GameManager.instance.getTurn() == 1) GameManager.instance.addFicha(cell_pos, g);
+        else GameManager.instance.addFichaPlayer2(cell_pos, g);
+
+        f.setSide(p1);
+
+        GameManager.instance.setTurnAction(GameManager.turnActions.placed);
+    }
     private bool myTurn()
     {  
         return (p1 && GameManager.instance.getTurn() == 1) || (!p1 && GameManager.instance.getTurn() == 2);

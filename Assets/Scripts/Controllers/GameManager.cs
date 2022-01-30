@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public enum alturas { valle =  -1, llano = 0, colina = 1};
     public enum flagCell { None, player1, player2 };
     public enum fichas { ranged, melee, tank, engineer, none };
+    public enum turnActions { none, placed, moved, action };
 
     public int turnPlayer = 1;
     public static int tableroSize = 8;
@@ -60,6 +61,10 @@ public class GameManager : MonoBehaviour
     int nFichasPlayer2 = 0;
 
     int nChanged = 0;
+
+    turnActions action;
+
+    private GameObject lockedToken = null;
     private void Awake()
     {
         //Cosa que viene en los apuntes para que el gamemanager no se destruya entre escenas
@@ -94,7 +99,7 @@ public class GameManager : MonoBehaviour
             uiM.changeId(newTurn.ToString());
             uiM.flip();
         } 
-        
+        action = turnActions.none;
         StartCoroutine(delayTurn(0.5f, newTurn));
     }
 
@@ -116,9 +121,17 @@ public class GameManager : MonoBehaviour
 
     public void tokenSelected(GameObject token){
         uiM.displayActions(token);
+        lockedToken = token;
+        lockedToken.GetComponent<SpriteRenderer>().color = new Color(0.8f,0.8f,0.8f,1.0f);
     }
     public void tokenUnselected(){
         uiM.hideActions();
+        if(lockedToken != null)
+            lockedToken.GetComponent<SpriteRenderer>().color = new Color(1.0f,1.0f,1.0f,1.0f);
+        lockedToken = null;
+    }
+    public GameObject getlockedToken(){
+        return lockedToken;
     }
     
     public int returncurrentLevel()
@@ -305,6 +318,14 @@ public class GameManager : MonoBehaviour
             cell.transform.parent.GetComponent<MapManager>().createFlag(cell.transform.position, cell.GetComponent<CasillaInfo>().getAltura(), flag);
             cell.GetComponent<CasillaInfo>().setFlag(flag);
         }
+    }
+
+    public turnActions getTurnAction(){
+        return action;
+    }
+
+    public void setTurnAction(turnActions act){
+        action = act;
     }
     
 }

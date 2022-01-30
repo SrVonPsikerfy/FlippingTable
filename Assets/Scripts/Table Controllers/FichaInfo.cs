@@ -5,11 +5,11 @@ using UnityEngine;
 using fichas = GameManager.fichas;
 public class FichaInfo : MonoBehaviour
 {
-    public GameObject currentFlag = null;
+    public GameObject Flag = null;
     public Sprite[] spriteArray;
     Vector2 cords;
     fichas f;
-
+    GameObject currentFlag;
     int rango, dmg, mov, vida;
     
     bool dead = false;
@@ -19,12 +19,14 @@ public class FichaInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentFlag = Instantiate(Flag, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f , this.gameObject.transform.position.z), Quaternion.identity);
         currentFlag.transform.parent = this.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        lightSide = GameManager.getTableroSide();
         if(player1Side){
             if(lightSide)
                 currentFlag.GetComponent<SpriteRenderer>().sprite = spriteArray[0];
@@ -60,7 +62,7 @@ public class FichaInfo : MonoBehaviour
         return f;
     }
 
-    public void setStats(int r, int d, int m, int v, bool side){
+    public void setStats(int r, int d, int m, int v){
         rango = r;
 
         dmg = d;
@@ -70,10 +72,6 @@ public class FichaInfo : MonoBehaviour
         vida = v;
 
         dead = false;
-
-        player1Side = side;
-
-        lightSide = true;
     }
 
     public void die(){
@@ -106,6 +104,9 @@ public class FichaInfo : MonoBehaviour
         if(vida<=0) die();
     }
 
+    public void setSide(bool p1){
+        player1Side = p1;
+    }
     public bool getSide(){
         return player1Side;
     }

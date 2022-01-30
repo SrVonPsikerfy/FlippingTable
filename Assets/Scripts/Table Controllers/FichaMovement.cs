@@ -31,14 +31,11 @@ public class FichaMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        //Solo se muueve si no ha hecho nada en el turno
+        if (Input.GetMouseButtonDown(0) && (GameManager.instance.getTurn() == 1 
+        && this.gameObject.GetComponent<FichaInfo>().getSide()) || (GameManager.instance.getTurn() == 2 && !this.gameObject.GetComponent<FichaInfo>().getSide()) 
+            && GameManager.instance.getTurnAction() == GameManager.turnActions.none){
 
-        if (Input.GetKeyDown(KeyCode.M)){
-            FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
-
-            if (f != null) f.die();
-        }
-
-        if (Input.GetMouseButtonDown(0)){
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
@@ -47,12 +44,11 @@ public class FichaMovement : MonoBehaviour
             CasillaInfo cell_info = hit.transform.gameObject.GetComponent<CasillaInfo>();
 
             FichaInfo token_info = hit.transform.gameObject.GetComponent<FichaInfo>();
-
-            if (hit.transform.gameObject == this.gameObject && !selected){
-                selected = true;
+            //Seleccion de ficha
+            if (hit.transform.gameObject == this.gameObject && GameManager.instance.getlockedToken() == null){
                 GameManager.instance.tokenSelected(this.gameObject);
             }
-            else if (cell_info != null && selected && behavior != null && behavior.getMove()) {
+            else if (cell_info != null && GameManager.instance.getlockedToken() == this.gameObject && behavior != null && behavior.getMove()) {
                 Vector2 dist = info.getCords() - cell_info.getCords();
 
                 if (info.getMovement() >= Mathf.Abs(dist.x) && info.getMovement() >= Mathf.Abs(dist.y)) {
@@ -68,31 +64,38 @@ public class FichaMovement : MonoBehaviour
                     moving = true;
                 }
                 else{
-                    selected = false;
+                    GameManager.instance.tokenUnselected();
                     GameManager.instance.hideRange();
-                    if( behavior!= null)  behavior.setMove(false);
+                    if( behavior!= null){
+                      behavior.setMove(false);
+                      GameManager.instance.setTurnAction(GameManager.turnActions.moved);
+                      }
                 }
             }
-            else{
-                selected = false;
+            else if(GameManager.instance.getlockedToken() != null && hit.transform.gameObject != this.gameObject){
                 GameManager.instance.tokenUnselected();
                 }
         }
-
-        if (moving &&  behavior != null &&  behavior.getMove()) {
-            this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-            if (this.transform.position == newPos) moving = false;
-
+        if(GameManager.instance.getlockedToken() == this.gameObject){
+            if (moving &&  behavior != null &&  behavior.getMove()) {
+                this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
+                if (this.transform.position == newPos) moving = false;
+                Debug.Log("epa");
+                GameManager.instance.hideRange();
+                GameManager.instance.ShowRange(info.getCords(), info.getRange());
+            }
+        }
+        else
+        {
             GameManager.instance.hideRange();
-            GameManager.instance.ShowRange(info.getCords(), info.getRange());
         }
         //Obtencion de la bandera
         GameObject cell = GameManager.getCell((int)this.gameObject.GetComponent<FichaInfo>().getCords().y, (int)this.gameObject.GetComponent<FichaInfo>().getCords().x);
         if(this.gameObject.GetComponent<Flag>() == null && cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.None){
-            if(cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.player2 && this.gameObject.GetComponent<FichaInfo>().getSide()){
+            if(cell.GetComponent<CasillaInfo>().getFlag() == GameManager.flagCell.player2 && this.gameObject.GetComponent<FichaInfo>().getSide()){
                 GameManager.pickFlag(this.gameObject, cell);
             }
-            else if(cell.GetComponent<CasillaInfo>().getFlag() != GameManager.flagCell.player1 && !this.gameObject.GetComponent<FichaInfo>().getSide()){
+            else if(cell.GetComponent<CasillaInfo>().getFlag() == GameManager.flagCell.player1 && !this.gameObject.GetComponent<FichaInfo>().getSide()){
                 GameManager.pickFlag(this.gameObject, cell);
             }
         }

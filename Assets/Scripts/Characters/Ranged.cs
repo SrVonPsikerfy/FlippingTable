@@ -12,6 +12,7 @@ public class Ranged : TokenBehaviour
     void Start(){
         gM = GameManager.instance;
         f = this.gameObject.GetComponent<FichaInfo>();
+        f.setStats(2, 1, 2, 1);
     }
 
     // Update is called once per frame
