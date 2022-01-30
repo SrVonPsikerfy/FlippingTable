@@ -101,7 +101,9 @@ public class FichaInfo : MonoBehaviour
     }
 
     public void receiveDamage(){
-        dmg--;
+
+        vida--;
+        if(vida<=0) die();
     }
 
     public bool getSide(){

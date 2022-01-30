@@ -19,6 +19,7 @@ public class Melee  : TokenBehaviour
         if(f.getDamage() > 0){
 
         if(attacks && Input.GetMouseButtonDown(0)){
+            attacks=false;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
@@ -33,7 +34,6 @@ public class Melee  : TokenBehaviour
                 other.receiveDamage();
                 Debug.Log("boink");
             }
-            
         }
         }
         else f.die();
@@ -50,9 +50,5 @@ public class Melee  : TokenBehaviour
             attacks=true;
         } 
         else Debug.Log("Heal attack");
-    }
-    
-    public void getHit(){
-        f.receiveDamage();
     }
 }

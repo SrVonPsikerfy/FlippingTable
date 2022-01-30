@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FichaMovement : MonoBehaviour
 {
-    bool selected = false, moving = false;
+    public bool selected = false, moving = false;
 
     // float altDif = 0.5f;
     float defaultPos = 0.9f;
@@ -52,7 +52,7 @@ public class FichaMovement : MonoBehaviour
                 selected = true;
                 GameManager.instance.tokenSelected(this.gameObject);
             }
-            else if(hit.transform.gameObject == this.gameObject && selected){
+            else{
                 selected = false;
                 GameManager.instance.tokenUnselected();
             }
