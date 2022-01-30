@@ -39,9 +39,6 @@ public class UIManager : MonoBehaviour {
 
     public void flip(){
         Camera.main.GetComponent<RotationCamera>().flip();
-
-                
-        Debug.Log("Saquenme de latinoAmerica");
     }
     public void displayActions(GameObject token){
         Terraformer isEngineer = token.GetComponent<Terraformer>();

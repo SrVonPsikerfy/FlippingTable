@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class FichaMovement : MonoBehaviour
 {
-    public bool selected = false, moving = false;
-
-    // float altDif = 0.5f;
+    float altDif = 0.5f;
     float defaultPos = 0.9f;
     float vallePos = 0.4f;
     float colinaPos = 1.4f;
 
     Vector3 newPos = new Vector3();
-
     FichaInfo info;
 
     #region Atributos
@@ -27,6 +24,7 @@ public class FichaMovement : MonoBehaviour
         behavior = GetComponent<TokenBehaviour>();
         terraformer = GetComponent<Terraformer>();
         newPos = this.transform.position;
+
     }
 
     // Update is called once per frame
@@ -60,30 +58,26 @@ public class FichaMovement : MonoBehaviour
 
                     GameManager.instance.SetFicha((int)cell_info.getCords().x, (int)cell_info.getCords().y, hit.transform.gameObject);
                     info.setCords(cell_info.getCords());
-
-                    moving = true;
+                    GameManager.instance.setTurnAction(GameManager.turnActions.moved);    //Se ha movido
+                    GameManager.instance.tokenUnselected();
+                    
                 }
                 else{
                     GameManager.instance.tokenUnselected();
                     GameManager.instance.hideRange();
                     if( behavior!= null){
                       behavior.setMove(false);
-                      GameManager.instance.setTurnAction(GameManager.turnActions.moved);
                       }
                 }
             }
             else if(GameManager.instance.getlockedToken() != null && hit.transform.gameObject != this.gameObject){
                 GameManager.instance.tokenUnselected();
-                }
-        }
-        if(GameManager.instance.getlockedToken() == this.gameObject){
-            if (moving &&  behavior != null &&  behavior.getMove()) {
-                this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-                if (this.transform.position == newPos) moving = false;
-                Debug.Log("epa");
-                GameManager.instance.hideRange();
-                GameManager.instance.ShowRange(info.getCords(), info.getRange());
             }
+        }
+        if (behavior != null && behavior.getMove()) {
+            Debug.Log(info);
+            GameManager.instance.hideRange();
+            GameManager.instance.ShowRange(info.getCords(), info.getRange());   //No dibuja el rango de movimiento
         }
         else
         {

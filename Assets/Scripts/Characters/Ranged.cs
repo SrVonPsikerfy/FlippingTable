@@ -17,9 +17,7 @@ public class Ranged : TokenBehaviour
 
     // Update is called once per frame
     void Update() {
-            FichaMovement mov = this.gameObject.GetComponent<FichaMovement>();
-            Debug.Log(mov.selected);
-        if(attacks && timer <= 0 && Input.GetMouseButtonDown(1)&&mov.selected){
+        if(attacks && timer <= 0 && Input.GetMouseButtonDown(1)&& GameManager.instance.getlockedToken() == this.gameObject){
             timer = 5.0f;
             attacks=false;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,7 +35,7 @@ public class Ranged : TokenBehaviour
 
             Vector2 diff = thisCoords - otherCoords;
             Debug.Log("diferencia: " + diff.magnitude);
-            if (mov.selected && Mathf.Abs(diff.x) <= f.getRange()&&Mathf.Abs(diff.y) <= f.getRange()){
+            if (GameManager.instance.getlockedToken() == this.gameObject && Mathf.Abs(diff.x) <= f.getRange()&&Mathf.Abs(diff.y) <= f.getRange()){
                 other.receiveDamage();
                 Debug.Log("boink");
 
