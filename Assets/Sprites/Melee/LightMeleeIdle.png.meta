@@ -1,19 +1,7 @@
 fileFormatVersion: 2
 guid: 6e880d64a553944f89763afda7d2c343
 TextureImporter:
-<<<<<<< Updated upstream
   internalIDToNameTable: []
-=======
-guid: 4e14bc02f21784dc4bb2127ac81807e8
-TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -5821376472308743955
-    second: LightMeleeIdle_0
-  - first:
-      213: -5007345272705287434
-    second: LightMeleeIdle_1
->>>>>>> Stashed changes
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -53,18 +41,6 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 0
-=======
-    filterMode: 0
-    aniso: 2
-    mipBias: -100
-    wrapU: 1
-    wrapV: 1
-    wrapW: -1
-  nPOTScale: 0
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 2
->>>>>>> Stashed changes
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -88,49 +64,6 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
-=======
-    textureCompression: 0
->>>>>>> Stashed changes
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-<<<<<<< Updated upstream
-    textureCompression: 1
-=======
-    textureCompression: 0
->>>>>>> Stashed changes
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -144,55 +77,6 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
-=======
-    sprites:
-    - serializedVersion: 2
-      name: LightMeleeIdle_0
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 0
-        width: 121
-        height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d262dae0ca7de4a93a8b7cd4bcf7fc34
-      internalID: -5821376472308743955
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LightMeleeIdle_1
-      rect:
-        serializedVersion: 2
-        x: 217
-        y: 0
-        width: 121
-        height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62627e31559ee4a8fa7a93e6eeb33283
-      internalID: -5007345272705287434
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    outline: []
-    physicsShape: []
-    bones: []
-    spriteID: 4b0dd118aff88418998ec8abb82db66d
->>>>>>> Stashed changes
     internalID: 0
     vertices: []
     indices: 

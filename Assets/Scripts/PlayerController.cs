@@ -99,9 +99,6 @@ public class PlayerController : MonoBehaviour
 
     private bool myTurn()
     {  
-        Debug.Log("---");
-        Debug.Log("Player 1: " + play1);
-
         if (play1 && GameManager.instance.getTurn()) return true;
 
         if (!play1 && !GameManager.instance.getTurn()) return true;
