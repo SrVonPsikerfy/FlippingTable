@@ -71,4 +71,12 @@ public class FichaInfo : MonoBehaviour
     public int getMovement(){
         return mov;
     }
+
+    public int getDamage(){
+        return dmg;
+    }
+
+    public void receiveDamage(){
+        dmg--;
+    }
 }
