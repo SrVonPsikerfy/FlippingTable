@@ -1,7 +1,6 @@
 fileFormatVersion: 2
 guid: 5d06c4829b3ab4d86857594e4e8025f4
 TextureImporter:
-<<<<<<< HEAD
   internalIDToNameTable:
   - first:
       213: 7726512964218186031
@@ -9,18 +8,11 @@ TextureImporter:
   - first:
       213: 7069006677970219529
     second: darkMeleeIdle_1
-=======
-  internalIDToNameTable: []
->>>>>>> master
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-<<<<<<< HEAD
     enableMipMap: 0
-=======
-    enableMipMap: 1
->>>>>>> master
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -45,7 +37,6 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD
     filterMode: 0
     aniso: -1
     mipBias: -100
@@ -56,18 +47,6 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-=======
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
-    wrapU: -1
-    wrapV: -1
-    wrapW: -1
-  nPOTScale: 1
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 0
->>>>>>> master
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,15 +55,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-<<<<<<< HEAD
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
-=======
-  alphaIsTransparency: 0
-  spriteTessellationDetail: -1
-  textureType: 0
->>>>>>> master
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -96,7 +69,6 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< HEAD
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -110,9 +82,6 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
-=======
-    textureCompression: 1
->>>>>>> master
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,7 +90,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< HEAD
     sprites:
     - serializedVersion: 2
       name: darkMeleeIdle_0
@@ -138,7 +106,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9f4abf69f59c427b9c4c15bcba5194d
+      spriteID: 385371f3128094bb1996417a10507607
       internalID: 7726512964218186031
       vertices: []
       indices: 
@@ -159,7 +127,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05ab2ac98a27140ebb11fa27206430b8
+      spriteID: 9856a1b2d69a749e29f1dfe88504d672
       internalID: 7069006677970219529
       vertices: []
       indices: 
@@ -168,14 +136,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: cbe23a50dbc914561bd6489911fa140c
-=======
-    sprites: []
-    outline: []
-    physicsShape: []
-    bones: []
-    spriteID: 
->>>>>>> master
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
