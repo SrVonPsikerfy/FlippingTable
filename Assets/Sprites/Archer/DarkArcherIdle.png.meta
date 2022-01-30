@@ -1,5 +1,4 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 guid: bbda8377b79fc4291a28a46e3e7f0813
 TextureImporter:
   internalIDToNameTable:
@@ -9,20 +8,11 @@ TextureImporter:
   - first:
       213: 3340721257512537573
     second: DarkArcherIdle_1
-=======
-guid: a3ae69da33f044c6b9bfb69841dc9091
-TextureImporter:
-  internalIDToNameTable: []
->>>>>>> Stashed changes
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-<<<<<<< Updated upstream
     enableMipMap: 0
-=======
-    enableMipMap: 1
->>>>>>> Stashed changes
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -47,9 +37,8 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< Updated upstream
     filterMode: 0
-    aniso: 2
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -58,18 +47,6 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-=======
-    filterMode: -1
-    aniso: 2
-    mipBias: -100
-    wrapU: -1
-    wrapV: -1
-    wrapW: -1
-  nPOTScale: 1
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 0
->>>>>>> Stashed changes
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -78,15 +55,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-<<<<<<< Updated upstream
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
-=======
-  alphaIsTransparency: 0
-  spriteTessellationDetail: -1
-  textureType: 0
->>>>>>> Stashed changes
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -95,14 +66,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< Updated upstream
     textureCompression: 0
-=======
-    textureCompression: 1
->>>>>>> Stashed changes
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -111,38 +78,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< Updated upstream
     textureCompression: 0
-=======
-    textureCompression: 1
->>>>>>> Stashed changes
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 8192
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -151,7 +90,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< Updated upstream
     sprites:
     - serializedVersion: 2
       name: DarkArcherIdle_0
@@ -168,7 +106,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8eeaf9d6b15554b64b545ede005072dd
+      spriteID: ce597b2c46fcd4d598e9ace7adf85522
       internalID: 45577868168544070
       vertices: []
       indices: 
@@ -189,7 +127,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e91d01aead1d494aac76bab400d386f
+      spriteID: 1942482fc27a24f049fdb2d73e716ce2
       internalID: 3340721257512537573
       vertices: []
       indices: 
@@ -198,14 +136,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0bc0c61b765b348e9a21ab37fa7c52e8
-=======
-    sprites: []
-    outline: []
-    physicsShape: []
-    bones: []
-    spriteID: 
->>>>>>> Stashed changes
+    spriteID: 3e6e0d157709a43b094c750601cf8fac
     internalID: 0
     vertices: []
     indices: 
