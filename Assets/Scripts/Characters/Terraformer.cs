@@ -8,9 +8,7 @@ public class Terraformer : TokenBehaviour
 
     GameManager gM;
     FichaInfo info;
-    bool gonMove = false;
     bool gonEdit = false;
-    bool gonAttack = false;
     void Start(){
         gM = GameManager.instance;
         info = GetComponent<FichaInfo>();
@@ -30,12 +28,8 @@ public class Terraformer : TokenBehaviour
         else GameManager.instance.hideRange();
     }
 
-    public void setMove(bool move) => gonMove = move;
-    public void setAttack(bool att) => gonAttack = att;
     public void setEdit(bool edit) => gonEdit = edit;
 
-    public bool getMove() => gonMove;
-    public bool getAttack() => gonAttack;
     public bool getEdit() => gonEdit;
 
     public override void Attack(){
