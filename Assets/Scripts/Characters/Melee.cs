@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Melee  : TokenBehaviour
 {
-    
     GameManager gM;
     bool attacks=false;
 
-        FichaInfo f ;
+    FichaInfo f ;
+
     void Start(){
         gM = GameManager.instance;
         f= this.gameObject.GetComponent<FichaInfo>();
@@ -22,7 +22,9 @@ public class Melee  : TokenBehaviour
         }
     }
     public override void Move(){
-        Debug.Log("Move Melee");
+        gonMove = !gonMove;
+        if(gonMove) GameManager.instance.ShowRange(f.getCords(), f.getRange());
+        else GameManager.instance.hideRange();
     }
 
     public override void Attack(){

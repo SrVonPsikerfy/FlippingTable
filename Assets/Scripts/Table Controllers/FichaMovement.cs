@@ -16,12 +16,15 @@ public class FichaMovement : MonoBehaviour
     FichaInfo info;
 
     #region Atributos
+    TokenBehaviour behavior;
     Terraformer terraformer;
     #endregion
 
     // Start is called before the first frame update
     void Start(){
         info = this.gameObject.GetComponent<FichaInfo>();
+
+        behavior = GetComponent<TokenBehaviour>();
         terraformer = GetComponent<Terraformer>();
         newPos = this.transform.position;
     }
@@ -53,7 +56,7 @@ public class FichaMovement : MonoBehaviour
                 selected = false;
                 GameManager.instance.tokenUnselected();
             }
-            else if (cell_info != null && selected && terraformer != null && terraformer.getMove()) {
+            else if (cell_info != null && selected && behavior != null && behavior.getMove()) {
                 Vector2 dist = info.getCords() - cell_info.getCords();
 
                 if (info.getMovement() >= Mathf.Abs(dist.x) && info.getMovement() >= Mathf.Abs(dist.y)) {
@@ -72,12 +75,12 @@ public class FichaMovement : MonoBehaviour
                 else{
                     selected = false;
                     GameManager.instance.hideRange();
-                    if(terraformer!= null) terraformer.setMove(false);
+                    if( behavior!= null)  behavior.setMove(false);
                 }
             }
         }
 
-        if (moving && terraformer != null && terraformer.getMove()) {
+        if (moving &&  behavior != null &&  behavior.getMove()) {
             this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
             if (this.transform.position == newPos) moving = false;
 
