@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject melee, ranged, tank, engi;
 
-    public bool play1;
+    public bool p1;
 
     // Update is called once per frame
     void Update()
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
                 case GameManager.alturas.colina: pos.y = 1.4f; break;
             }
 
-            Debug.Log("Es el player 1:" + play1);
+            Debug.Log("Es el player 1:" + p1);
             if (Input.GetKeyDown(KeyCode.A))
             {
                 GameObject g = Instantiate(melee, pos, Quaternion.identity);
@@ -38,10 +38,10 @@ public class PlayerController : MonoBehaviour
 
                 if (f != null) f.setInfo(new Vector2(0, 1), GameManager.fichas.melee);
 
-                if(GameManager.instance.getTurn())GameManager.instance.addFicha(new Vector2(0, 1), g);
+                if(GameManager.instance.getTurn() == 1)GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(1, 1, 1, 2, GameManager.instance.getTurn());
+                f.setStats(1, 1, 1, 2, p1);
 
                 GameManager.instance.changePlayer();
             }
@@ -54,10 +54,10 @@ public class PlayerController : MonoBehaviour
                 if (f != null)
                     f.setInfo(new Vector2(0, 1), GameManager.fichas.ranged);
 
-                if (GameManager.instance.getTurn()) GameManager.instance.addFicha(new Vector2(0, 1), g);
+                if (GameManager.instance.getTurn() == 1) GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(2, 1, 2, 1, GameManager.instance.getTurn());
+                f.setStats(2, 1, 2, 1, p1);
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
@@ -68,10 +68,10 @@ public class PlayerController : MonoBehaviour
                 if (f != null)
                     f.setInfo(new Vector2(0, 1), GameManager.fichas.tank);
 
-                if (GameManager.instance.getTurn()) GameManager.instance.addFicha(new Vector2(0, 1), g);
+                if (GameManager.instance.getTurn() == 1) GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(1, 1, 1, 3, GameManager.instance.getTurn());
+                f.setStats(1, 1, 1, 3, p1);
             }
             else if (Input.GetKeyDown(KeyCode.R))
             {
@@ -82,12 +82,10 @@ public class PlayerController : MonoBehaviour
                 if (f != null)
                     f.setInfo(new Vector2(0, 1), GameManager.fichas.engineer);
 
-                if (GameManager.instance.getTurn()) GameManager.instance.addFicha(new Vector2(0, 1), g);
+                if (GameManager.instance.getTurn() == 1) GameManager.instance.addFicha(new Vector2(0, 1), g);
                 else GameManager.instance.addFichaPlayer2(new Vector2(0, 1), g);
 
-                f.setStats(1, 1, 1, 1, GameManager.instance.getTurn());
-
-
+                f.setStats(1, 1, 1, 1, p1);
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
@@ -99,10 +97,6 @@ public class PlayerController : MonoBehaviour
 
     private bool myTurn()
     {  
-        if (play1 && GameManager.instance.getTurn()) return true;
-
-        if (!play1 && !GameManager.instance.getTurn()) return true;
-
-        return false;
+        return (p1 && GameManager.instance.getTurn() == 1) || (!p1 && GameManager.instance.getTurn() == 2);
     }
 }

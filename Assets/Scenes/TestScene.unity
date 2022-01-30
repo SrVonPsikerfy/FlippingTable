@@ -1253,7 +1253,7 @@ MonoBehaviour:
   ranged: {fileID: 2024838555102672137, guid: 86c019e0d0a8e41f1a47e3d45987bd58, type: 3}
   tank: {fileID: 1311514295072950148, guid: 09863e801e2fe46749b02a0bd91733a1, type: 3}
   engi: {fileID: 6264996116297023654, guid: c78fb22e4b4c44af78bb6a64a572aeed, type: 3}
-  play1: 0
+  play1: 1
 --- !u!4 &971459162
 Transform:
   m_ObjectHideFlags: 0
