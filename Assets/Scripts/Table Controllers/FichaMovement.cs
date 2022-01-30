@@ -6,140 +6,83 @@ public class FichaMovement : MonoBehaviour
 {
     bool selected = false, moving = false;
 
-    float altDif = 0.5f;
+    // float altDif = 0.5f;
     float defaultPos = 0.9f;
     float vallePos = 0.4f;
     float colinaPos = 1.4f;
 
     Vector3 newPos = new Vector3();
 
-    FichaInfo info = new FichaInfo();
+    FichaInfo info;
+
+    #region Atributos
+    Terraformer terraformer;
+    #endregion
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         info = this.gameObject.GetComponent<FichaInfo>();
+        terraformer = GetComponent<Terraformer>();
         newPos = this.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
+        if (Input.GetKeyDown(KeyCode.M)){
             FichaInfo f = this.gameObject.GetComponent<FichaInfo>();
 
-            if (f != null)
-                f.die();
+            if (f != null) f.die();
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetMouseButtonDown(0)){
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
-
             if (hit.transform == null) return;
-            CasillaInfo infCas = hit.transform.gameObject.GetComponent<CasillaInfo>();
 
-            FichaInfo infHit = hit.transform.gameObject.GetComponent<FichaInfo>();
+            CasillaInfo cell_info = hit.transform.gameObject.GetComponent<CasillaInfo>();
 
-            if (hit.transform.gameObject == this.gameObject && !selected)
-            {
+            FichaInfo token_info = hit.transform.gameObject.GetComponent<FichaInfo>();
 
-                //Vector2 dist = info.getCords() - infHit.getCords();
-
+            if (hit.transform.gameObject == this.gameObject && !selected){
                 selected = true;
-                GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
-                this.gameObject.GetComponent<FichaInfo>().getRange());
-
-                //asies tengo retraso mental severo by Laura
-
-                //para codigo limpito
-
-                // if (infCas != null && selected)
-                // {
-
-                //     // Vector2 dist = infCas.getCords() - infGeneral.getCords();
-
-                //     // if (infGeneral.getMovement() >= Mathf.Abs(dist.x) && infGeneral.getMovement() >= Mathf.Abs(dist.y))
-                //     // {
-                //     //     newPos = hit.transform.position;
-
-                //     //     if (infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-                //     //     else if (infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
-                //     //     else newPos.y = defaultPos;
-
-                //     //     this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
-                //     //     //GameManager.instance.SetFicha((int)infCas.getCords().x,(int) infCas.getCords().y, hit.transform.gameObject);
-                //     //     //Creo que esta aqui
-                //     //     infGeneral.setCords(infCas.getCords());
-
-                //     //     selected = false; moving = true;
-                //     // }
-                // }
-                // else if (infHit != null)
-                // {
-                //     // selected = (infHit.getCords() == infGeneral.getCords());
-                //     // Debug.Log(infHit.getCords());
-                //     // Debug.Log(infGeneral.getCords());
-                //     // Debug.Log(selected);
-                //     // if (selected)
-                //     // {
-                //     //     GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
-                //     //      this.gameObject.GetComponent<FichaInfo>().getRange());
-                //     // }
-                // }
-                // else
-                // {
-                //     selected = false;
-                // }
+                GameManager.instance.tokenSelected(this.gameObject);
             }
-            else if (infCas != null && selected)
-            {
-                Vector2 dist = info.getCords() - infCas.getCords();
+            else if(hit.transform.gameObject == this.gameObject && selected){
+                selected = false;
+                GameManager.instance.tokenUnselected();
+            }
+            else if (cell_info != null && selected && terraformer != null && terraformer.getMove()) {
+                Vector2 dist = info.getCords() - cell_info.getCords();
 
-                if (info.getMovement() >= Mathf.Abs(dist.x) && info.getMovement() >= Mathf.Abs(dist.y))
-                {
+                if (info.getMovement() >= Mathf.Abs(dist.x) && info.getMovement() >= Mathf.Abs(dist.y)) {
                     newPos = hit.transform.position;
                     
-                    Debug.Log(infCas.getAltura());
-                    if (infCas.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
-                    else if (infCas.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
+                    Debug.Log(cell_info.getAltura());
+                    if (cell_info.getAltura() == GameManager.alturas.colina) newPos.y = colinaPos;
+                    else if (cell_info.getAltura() == GameManager.alturas.valle) newPos.y = vallePos;
                     else newPos.y = defaultPos;
 
-                    
-                    GameManager.instance.SetFicha((int)infCas.getCords().x, (int)infCas.getCords().y, hit.transform.gameObject);
-                    info.setCords(infCas.getCords());
+                    GameManager.instance.SetFicha((int)cell_info.getCords().x, (int)cell_info.getCords().y, hit.transform.gameObject);
+                    info.setCords(cell_info.getCords());
 
-                    selected = false; moving = true;
+                    moving = true;
                 }
-            }
-            else if (hit.transform.gameObject != this.gameObject && selected) 
-            {
-                selected = false;
-                GameManager.instance.hideRange();
-            }
-            // else
-            // {
-            //     selected = false;
-            // }
-
-            if (selected){
-
-                GameManager.instance.tokenSelected(this.gameObject);
-                // GameManager.instance.ShowRange(this.gameObject.GetComponent<FichaInfo>().getCords(),
-                //  this.gameObject.GetComponent<FichaInfo>().getRange());
+                else{
+                    selected = false;
+                    GameManager.instance.hideRange();
+                    if(terraformer!= null) terraformer.setMove(false);
+                }
             }
         }
 
-        if (moving)
-        {
+        if (moving && terraformer != null && terraformer.getMove()) {
             this.transform.position = Vector3.Lerp(this.transform.position, newPos, 0.5f);
             if (this.transform.position == newPos) moving = false;
 
             GameManager.instance.hideRange();
+            GameManager.instance.ShowRange(info.getCords(), info.getRange());
         }
         //Obtencion de la bandera
         GameObject cell = GameManager.getCell((int)this.gameObject.GetComponent<FichaInfo>().getCords().y, (int)this.gameObject.GetComponent<FichaInfo>().getCords().x);

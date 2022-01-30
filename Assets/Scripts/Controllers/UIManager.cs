@@ -67,4 +67,13 @@ public class UIManager : MonoBehaviour {
             // button.SetActive(true);
         }
     }
+
+    public void hideActions(){
+        actions.SetActive(false);
+        Transform tr = actions.transform;
+        for(int i = 0; i < tr.childCount; i++){
+            GameObject button = tr.GetChild(i).gameObject;
+            button.SetActive(false);
+        }
+    }
 }
