@@ -52,10 +52,6 @@ public class FichaMovement : MonoBehaviour
                 selected = true;
                 GameManager.instance.tokenSelected(this.gameObject);
             }
-            else{
-                selected = false;
-                GameManager.instance.tokenUnselected();
-            }
             else if (cell_info != null && selected && behavior != null && behavior.getMove()) {
                 Vector2 dist = info.getCords() - cell_info.getCords();
 
@@ -77,6 +73,10 @@ public class FichaMovement : MonoBehaviour
                     if( behavior!= null)  behavior.setMove(false);
                 }
             }
+            else{
+                selected = false;
+                GameManager.instance.tokenUnselected();
+                }
         }
 
         if (moving &&  behavior != null &&  behavior.getMove()) {
