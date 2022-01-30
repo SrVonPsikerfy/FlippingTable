@@ -73,6 +73,10 @@ public class FichaMovement : MonoBehaviour
                     if( behavior!= null)  behavior.setMove(false);
                 }
             }
+            else{
+                selected = false;
+                GameManager.instance.tokenUnselected();
+                }
         }
 
         if (moving &&  behavior != null &&  behavior.getMove()) {
