@@ -6,6 +6,7 @@ public class Melee  : TokenBehaviour
 {
     
     GameManager gM;
+    bool attacks=false;
 
         FichaInfo f ;
     void Start(){
@@ -25,7 +26,10 @@ public class Melee  : TokenBehaviour
     }
 
     public override void Attack(){
-        if(GameManager.getTableroSide()) Debug.Log("Attack Melee");
+        if(GameManager.getTableroSide()){
+            Debug.Log("Attack Melee");
+            attacks=true;
+        } 
         else Debug.Log("Heal attack");
     }
     
